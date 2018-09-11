@@ -17,6 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('/profit/pair', 'ProfitController@getByPair')->name('profit');
+    Route::get('/profit/bot', 'ProfitController@getByBot')->name('profit');
+
+    Route::get('/calculator/longBot', 'CalculatorController@byLongBot')->name('calculator');
+    Route::get('/profit/shortBot', 'CalculatorController@byShortBot')->name('calculator');
+});

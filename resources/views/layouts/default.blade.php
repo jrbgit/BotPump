@@ -11,7 +11,7 @@
 
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte/AdminLTE.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/adminlte/skins/skin-blue.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/adminlte/skins/_all-skins.min.css') }}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,7 +20,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="skin-blue">
+<body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
         <!-- Header -->
         @include('partials.header')
