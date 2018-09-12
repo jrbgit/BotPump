@@ -43,8 +43,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ url('profit/pair') }}"><i class="fa fa-circle-o"></i> Profit by Pair</a></li>
-                    <li><a href="{{ url('profit/bot') }}"><i class="fa fa-circle-o"></i> Profit by Bot</a></li>
+                    <li class="{{ request()->is('profit/pair*') ? 'active' : '' }}"><a href="{{ url('profit/pair') }}"><i class="fa fa-circle-o"></i> Profit by Pair</a></li>
+                    <li class="{{ request()->is('profit/bot*') ? 'active' : '' }}"><a href="{{ url('profit/bot') }}"><i class="fa fa-circle-o"></i> Profit by Bot</a></li>
                 </ul>
             </li>
             <li class="{{ request()->is('calculator*') ? 'active menu-open' : '' }} treeview">
@@ -56,8 +56,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ url('calculator/longBot') }}"><i class="fa fa-circle-o"></i> Long Bot</a></li>
-                    <li><a href="{{ url('calculator/shotBot') }}"><i class="fa fa-circle-o"></i> Short Bot</a></li>
+                    <li class="{{ request()->is('calculator/longBot*') ? 'active' : '' }}"><a href="{{ url('calculator/longBot') }}"><i class="fa fa-circle-o"></i> Long Bot</a></li>
+                    <li class="{{ request()->is('calculator/shortBot*') ? 'active' : '' }}"><a href="{{ url('calculator/shotBot') }}"><i class="fa fa-circle-o"></i> Short Bot</a></li>
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->

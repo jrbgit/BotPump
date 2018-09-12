@@ -24,5 +24,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/profit/bot', 'ProfitController@getByBot')->name('profit');
 
     Route::get('/calculator/longBot', 'CalculatorController@byLongBot')->name('calculator');
-    Route::get('/profit/shortBot', 'CalculatorController@byShortBot')->name('calculator');
+    Route::get('/calculator/shortBot', 'CalculatorController@byShortBot')->name('calculator');
 });

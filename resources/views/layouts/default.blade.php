@@ -32,14 +32,30 @@
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
+                    <?php
+                        $segments = Request::segments();
+                    ?>
                     <h1>
-                        {{ $page_title or "Page Title" }}
-                        <small>{{ $page_description or null }}</small>
+                        {{ ucwords($segments[0]) }}
+                        <small></small>
                     </h1>
+
+
                     <!-- You can dynamically generate breadcrumbs here -->
-                    <ol class="breadcrumb">
+                    <!--ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
                         <li class="active">Here</li>
+                    </ol-->
+                    <ol class="breadcrumb">
+                        @for($i = 0; $i < sizeof($segments); $i++)
+                            @if($i == 0)
+                                <li><i class="fa fa-dashboard"></i> {{ ucwords($segments[$i]) }}</li>
+                            @elseif($i == sizeof($segments))
+                                <li class="active">{{ ucwords($segments[$i]) }}</li>
+                            @else
+                                <li>{{ ucwords($segments[$i]) }}</li>
+                            @endif
+                        @endfor
                     </ol>
                 </section>
 
