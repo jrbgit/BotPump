@@ -20,6 +20,8 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
+    Route::get('/3commas/loadDeal', 'ThreeCommasController@loadDealFrom3Commas');
+
     Route::get('/profit/pair', 'ProfitController@getByPair')->name('profit');
     Route::get('/profit/bot', 'ProfitController@getByBot')->name('profit');
 

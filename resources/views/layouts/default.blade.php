@@ -77,5 +77,12 @@
 
     @yield('script')
 
+    @if (session()->has('load_deal'))
+        <script>
+            alert('{{ session('load_deal') }}');
+            //alert('{{ decrypt(session('load_deal')) }}');
+        </script>
+    @endif
+
 </body>
 </html>
