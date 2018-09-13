@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{{ asset('css/font-awesome/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/ionicons/ionicons.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/datatables.net-bs/dataTables.bootstrap.min.css') }}">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte/AdminLTE.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/adminlte/skins/_all-skins.min.css') }}">
@@ -72,7 +74,14 @@
     </div><!-- ./wrapper -->
 
     <script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
+
     <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
+
+    <script src="{{ asset('js/datatables.net/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/datatables.net-bs/dataTables.bootstrap.min.js') }}"></script>
+
+    <script src="{{ asset('js/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+
     <script src="{{ asset('js/adminlte/adminlte.min.js') }}"></script>
 
     @yield('script')

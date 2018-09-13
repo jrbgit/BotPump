@@ -57,7 +57,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ request()->is('calculator/longBot*') ? 'active' : '' }}"><a href="{{ url('calculator/longBot') }}"><i class="fa fa-circle-o"></i> Long Bot</a></li>
-                    <li class="{{ request()->is('calculator/shortBot*') ? 'active' : '' }}"><a href="{{ url('calculator/shotBot') }}"><i class="fa fa-circle-o"></i> Short Bot</a></li>
+                    <li class="{{ request()->is('calculator/shortBot*') ? 'active' : '' }}"><a href="{{ url('calculator/shortBot') }}"><i class="fa fa-circle-o"></i> Short Bot</a></li>
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->

@@ -18,13 +18,17 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('/dashboard', 'DashboardController@index');
+
+    Route::get('/apikey', 'ApiKeyController@index');
+    Route::get('/apikey/create', 'ApiKeyController@create');
+    Route::post('/apikey/store', 'ApiKeyController@store')->name('apikey/store');
 
     Route::get('/3commas/loadDeal', 'ThreeCommasController@loadDealFrom3Commas');
 
-    Route::get('/profit/pair', 'ProfitController@getByPair')->name('profit');
-    Route::get('/profit/bot', 'ProfitController@getByBot')->name('profit');
+    Route::get('/profit/pair', 'ProfitController@getByPair');
+    Route::get('/profit/bot', 'ProfitController@getByBot');
 
-    Route::get('/calculator/longBot', 'CalculatorController@byLongBot')->name('calculator');
-    Route::get('/calculator/shortBot', 'CalculatorController@byShortBot')->name('calculator');
+    Route::get('/calculator/longBot', 'CalculatorController@byLongBot');
+    Route::get('/calculator/shortBot', 'CalculatorController@byShortBot');
 });
