@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="{{ asset('css/datatables.net-bs/dataTables.bootstrap.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/highcharts/highcharts.css') }}">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte/AdminLTE.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/adminlte/skins/_all-skins.min.css') }}">
@@ -80,6 +82,8 @@
     <script src="{{ asset('js/datatables.net/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/datatables.net-bs/dataTables.bootstrap.min.js') }}"></script>
 
+    <script src="{{ asset('js/highcharts/highcharts.js') }}"></script>
+
     <script src="{{ asset('js/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 
     <script src="{{ asset('js/adminlte/adminlte.min.js') }}"></script>
@@ -92,13 +96,12 @@
                 console.log(response);
                 alert('data load succeed');
             });
-        </script-->
-        <script>
+
             $.get('{{ route('3commas/loadBots') }}', function (response) {
                 console.log(response);
                 alert('data load succeed');
             });
-        </script>
+        </script-->
     @endif
 
 </body>
