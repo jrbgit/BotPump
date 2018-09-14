@@ -12,4 +12,14 @@ return [
         'method' => 'POST',
         'security' => 'SIGNED'
     ],
+    'get_bot_stats' => [
+        'end_point' => '/public/api/ver1/bots/stats',
+        'method' => 'GET',
+        'security' => 'SIGNED'
+    ],
+    'user_bots' => [
+        'end_point' => '/public/api/ver1/bots',
+        'method' => 'GET',
+        'security' => 'SIGNED'
+    ]
 ];

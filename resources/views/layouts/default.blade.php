@@ -87,9 +87,17 @@
     @yield('script')
 
     @if (session()->has('load_deal'))
+        <!--script>
+            $.get('{{ route('3commas/loadDeal') }}', function (response) {
+                console.log(response);
+                alert('data load succeed');
+            });
+        </script-->
         <script>
-            alert('{{ session('load_deal') }}');
-            //alert('{{ decrypt(session('load_deal')) }}');
+            $.get('{{ route('3commas/loadBots') }}', function (response) {
+                console.log(response);
+                alert('data load succeed');
+            });
         </script>
     @endif
 
