@@ -18,7 +18,7 @@
 
         <div id="both" class="w3-container tab" style="display: block;">
             <div class="content chart">
-                <div id="both-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <div id="chart_both" style="min-width: 310px; min-height: 400px; margin: 0 auto"></div>
             </div>
             <div class="content table">
                 <table id ="tbl_both" class="table table-bordered table-striped">
@@ -46,7 +46,7 @@
 
         <div id="long" class="w3-container tab" style="display:none">
             <div class="content chart">
-                <div id="long-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <div id="chart_long" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             </div>
             <div class="content table">
                 <table id ="tbl_long" class="table table-bordered table-striped">
@@ -74,7 +74,7 @@
 
         <div id="short" class="w3-container tab" style="display:none">
             <div class="content chart">
-                <div id="both-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <div id="chart_short" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             </div>
             <div class="content table">
                 <table id ="tbl_short" class="table table-bordered table-striped">
@@ -104,4 +104,74 @@
 
 @section('script')
     <script src="{{ asset('js/profit.js') }}"></script>
+    <script>
+        Highcharts.chart('chart_both', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Chart for profit by both pair'
+            },
+            yAxis: {
+                title: {
+                    text: 'Total profit'
+                },
+                tickInterval: 0.00000001
+            },
+            xAxis: {
+                categories: ['Both bot pair']
+            },
+            credits: {
+                enabled: false
+            },
+            series: [
+                @foreach($both as $item)
+                    {
+                        name: '{{ $item->pair }}',
+                        data: [{{ $item->total_profit }}]
+                    },
+                @endforeach
+            ]
+        });
+
+        Highcharts.chart('chart_long', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Chart for profit by long pair'
+            },
+            credits: {
+                enabled: false
+            },
+            series: [
+                    @foreach($long as $item)
+                {
+                    name: '{{ $item->pair }}',
+                    data: [{{ $item->total_profit }}]
+                },
+                @endforeach
+            ]
+        });
+
+        Highcharts.chart('chart_short', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Chart for profit by short pair'
+            },
+            credits: {
+                enabled: false
+            },
+            series: [
+                    @foreach($short as $item)
+                {
+                    name: '{{ $item->pair }}',
+                    data: [{{ $item->total_profit }}]
+                },
+                @endforeach
+            ]
+        });
+    </script>
 @endsection

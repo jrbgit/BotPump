@@ -26,12 +26,13 @@ class ProfitController extends Controller
         $data['short'] = DB::select($this->buildQuery("short",$api_key->id, "bot_id"));
         return view('pages.profit.bot', $data);
     }
-    function buildQuery($type,$api_key, $group){
+
+    function buildQuery($type, $api_key, $group){
         $group == "pair"? $field="deals.pair" : $field="bot_name";
         if($type == "both"){
             $sql = "SELECT SUM(final_profit) total_profit, $field, COUNT(*) count
                     FROM deals
-                    WHERE deals.api_key_id = '$api_key'
+                    WHERE deals.pair IS NOT NULL AND deals.api_key_id = '$api_key'
                     GROUP BY $group";
         }else{
             $sql = "SELECT SUM(deals.final_profit) total_profit, $field, COUNT(*) count
