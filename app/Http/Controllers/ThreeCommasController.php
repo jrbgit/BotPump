@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Bot;
 use App\Deal;
 use GuzzleHttp;
 use Config;
@@ -89,10 +90,10 @@ class ThreeCommasController extends Controller
                 $data = json_decode($response->getBody());
                 foreach ($data as $json) {
                     try {
-                        $deal = new Deal();
-                        $deal->fill((array)$json);
-                        $deal->api_key_id = $user->api_keys[0]['id'];
-                        $deal->save();
+                        $bot = new Bot();
+                        $bot->fill((array)$json);
+                        $bot->api_key_id = $user->api_keys[0]['id'];
+                        $bot->save();
                     } catch (QueryException $exception) {
 
                     }
