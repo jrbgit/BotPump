@@ -96,13 +96,12 @@
                 console.log(response);
                 alert('data load succeed');
             });
-        </script-->
-        <script>
+
             $.get('{{ route('3commas/loadBots') }}', function (response) {
                 console.log(response);
                 alert('data load succeed');
             });
-        </script>
+        </script-->
     @endif
 
 </body>

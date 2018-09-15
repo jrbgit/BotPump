@@ -37,4 +37,8 @@ class Deal extends Model
             $this->attributes['closed_at'] = date('Y-m-d H:i:s', $time);
         }
     }
+
+    public function bot() {
+        return $this->hasOne('App\Bot');
+    }
 }

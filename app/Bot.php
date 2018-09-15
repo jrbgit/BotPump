@@ -53,4 +53,8 @@ class Bot extends Model
         else
             return [];
     }
+
+    public function deals() {
+        return $this->belongsToMany('App\Deal');
+    }
 }
