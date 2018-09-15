@@ -1,9 +1,9 @@
 @extends('layouts.default')
 
 @section('content')
-    <div class="box">
+    <div class="w3-container">
+        <h2>API Key List</h2>
         <div class="box-header">
-            <h3 class="box-title">API Key List</h3>
             <a href="{{ url('/apikey/create') }}" class="btn btn-flat btn-success pull-right">New API Key</a>
         </div>
         <!-- /.box-header -->
