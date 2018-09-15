@@ -16,17 +16,18 @@
             </a>
         </div>
 
-        <div id="both" class="w3-container tab" style="display:none">
+        <div id="both" class="w3-container tab" style="display:block">
             <div class="content chart">
                 <div id="chart_both" style="min-width: 310px; min-height: 400px; height: 100%; margin: 0 auto"></div>
             </div>
             <div class="content table">
                 <table id ="tbl_both" class="table table-bordered table-striped">
                     <thead>
-                    <th>#</th>
-                    <th>Bot Name</th>
-                    <th>Total Deals</th>
-                    <th>Total Profit</th>
+                        <th>#</th>
+                        <th>Bot Name</th>
+                        <th>Total Deals</th>
+                        <th>Total Profit</th>
+                        <th>Strategy</th>
                     </thead>
                     <tbody>
                     @if(isset($both))
@@ -36,6 +37,7 @@
                                 <td>{{ isset($item->bot_name) ? $item->bot_name : "NaN" }}</td>
                                 <td>{{ $item->count }}</td>
                                 <td>{{ isset($item->total_profit) ? $item->total_profit : "0" }}</td>
+                                <td><span class="label {{ $item->strategy == "long"?"label-success": "label-danger" }}">{{ $item->strategy }}</span></td>
                             </tr>
                         @endforeach
                     @endif
@@ -44,7 +46,7 @@
             </div>
         </div>
 
-        <div id="long" class="w3-container tab" style="display:block">
+        <div id="long" class="w3-container tab" style="display:none">
             <div class="content chart">
                 <div id="chart_long" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             </div>

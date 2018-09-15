@@ -28,10 +28,11 @@ class ProfitController extends Controller
     }
 
     function buildQuery($type, $api_key, $group){
-        $group == "pair"? $field="deals.pair" : $field="bot_name";
+        $group == "pair"? $field="deals.pair" : $field="bot_name, strategy";
         if($type == "both"){
             $sql = "SELECT SUM(final_profit) total_profit, $field, COUNT(*) count
                     FROM deals
+                    LEFT JOIN bots ON bots.id = deals.bot_id
                     WHERE deals.pair IS NOT NULL AND deals.api_key_id = '$api_key'
                     GROUP BY $group";
         }else{
