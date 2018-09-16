@@ -12,16 +12,15 @@
     <link rel="stylesheet" href="{{ asset('css/datatables.net-bs/dataTables.bootstrap.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/highcharts/highcharts.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/w3.css') }}">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte/AdminLTE.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/adminlte/skins/_all-skins.min.css') }}">
-    <style>
-        .w3-container{
-            background-color: white !important;
-            border-top : solid #d2d6de;
-        }
-    </style>
+
+    <link rel="stylesheet" href="{{ asset('css/w3.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -44,10 +43,10 @@
                     <?php
                         $segments = Request::segments();
                     ?>
-                   {{-- <h1>
+                   <!--h1>
                         {{ ucwords($segments[0]) }}
                         <small></small>
-                    </h1>
+                    </h1-->
 
 
                     <!-- You can dynamically generate breadcrumbs here -->

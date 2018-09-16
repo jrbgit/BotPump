@@ -40,4 +40,12 @@ class ApiKey extends Model
             return $value;
         }
     }
+
+    public function deals() {
+        return $this->hasMany('App\Deal');
+    }
+
+    public function bots() {
+        return $this->hasMany('App\Bot');
+    }
 }

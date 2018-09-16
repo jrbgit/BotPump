@@ -16,7 +16,7 @@
             </a>
         </div>
 
-        <div id="both" class="w3-container tab" style="display:block">
+        <div id="both" class="tab" style="display:block">
             <div class="content chart">
                 <div id="chart_both" style="min-width: 310px; min-height: 400px; height: 100%; margin: 0 auto"></div>
             </div>
@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <div id="long" class="w3-container tab" style="display:none">
+        <div id="long" class="tab" style="display:none">
             <div class="content chart">
                 <div id="chart_long" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             </div>
@@ -74,7 +74,7 @@
             </div>
         </div>
 
-        <div id="short" class="w3-container tab" style="display:none">
+        <div id="short" class="tab" style="display:none">
             <div class="content chart">
                 <div id="chart_short" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             </div>
