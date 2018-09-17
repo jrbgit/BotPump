@@ -35,7 +35,7 @@
                                 <td>{{ $i + 1 }}</td>
                                 <td>{{ isset($item->pair) ? $item->pair : "NaN" }}</td>
                                 <td>{{ $item->count }}</td>
-                                <td>{{ isset($item->total_profit) ? $item->total_profit : "0" }}</td>
+                                <td>{{ isset($item->total_profit) ? (double)($item->total_profit) : "0" }}</td>
                             </tr>
                         @endforeach
                     @endif

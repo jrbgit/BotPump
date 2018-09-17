@@ -36,7 +36,7 @@
                                 <td>{{ $i + 1 }}</td>
                                 <td>{{ isset($item->bot_name) ? $item->bot_name : "NaN" }}</td>
                                 <td>{{ $item->count }}</td>
-                                <td>{{ isset($item->total_profit) ? $item->total_profit : "0" }}</td>
+                                <td>{{ isset($item->total_profit) ? (double)($item->total_profit) : "0" }}</td>
                                 <td><span class="label {{ $item->strategy == "long"?"label-success": "label-danger" }}">{{ $item->strategy }}</span></td>
                             </tr>
                         @endforeach
