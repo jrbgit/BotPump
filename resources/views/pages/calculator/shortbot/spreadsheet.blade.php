@@ -43,7 +43,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <table id="tbl_short">
+            <table id="tbl_short" style="width: 100%;">
                 <thead>
                 <tr>
                     <th style="color:#000;background-color: #bdffff; width: 10%;">Base Trade:</th>
