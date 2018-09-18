@@ -20,9 +20,7 @@
 !function( $ ) {
 
 	var Slider = function(element, options) {
-		this.dragLocked = false;
-		this.limit = 100000;
-		this.element = $(element).hide();
+		this.element = $(element);
 		this.picker = $('<div class="slider">'+
 							'<div class="slider-track">'+
 								'<div class="slider-selection"></div>'+
@@ -124,7 +122,6 @@
 		this.size = this.picker[0][this.sizePos];
 
 		this.formater = options.formater;
-		this.reversed = this.element.data('slider-reversed')||options.reversed;
 
 		this.layout();
 
@@ -170,42 +167,32 @@
 		},
 
 		layout: function(){
-      var positionPercentages;
-      
-      if(this.reversed) {
-        positionPercentages = [ this.percentage[1] - this.percentage[0], this.percentage[1] ];
-      } else {
-        positionPercentages = [ this.percentage[0], this.percentage[1] ];
-      }
-
-      this.handle1Stype[this.stylePos] = positionPercentages[0]+'%';
-      this.handle2Stype[this.stylePos] = positionPercentages[1]+'%';
-      if (this.orientation == 'vertical') {
-        this.selectionElStyle.top = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
-        this.selectionElStyle.height = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
-      } else {
-        this.selectionElStyle.left = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
-        this.selectionElStyle.width = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
-      }
-
-      if (this.range) {
-        this.tooltipInner.text(
-          this.formater(this.value[0]) + 
-          ' : ' + 
-          this.formater(this.value[1])
-        );
-        this.tooltip[0].style[this.stylePos] = this.size * (positionPercentages[0] + (positionPercentages[1] - positionPercentages[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
-      } else {
-        this.tooltipInner.text(
-          this.formater(this.value[0])
-        );
-        this.tooltip[0].style[this.stylePos] = this.size * positionPercentages[0]/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
-      }
-    },
+			this.handle1Stype[this.stylePos] = this.percentage[0]+'%';
+			this.handle2Stype[this.stylePos] = this.percentage[1]+'%';
+			if (this.orientation == 'vertical') {
+				this.selectionElStyle.top = Math.min(this.percentage[0], this.percentage[1]) +'%';
+				this.selectionElStyle.height = Math.abs(this.percentage[0] - this.percentage[1]) +'%';
+			} else {
+				this.selectionElStyle.left = Math.min(this.percentage[0], this.percentage[1]) +'%';
+				this.selectionElStyle.width = Math.abs(this.percentage[0] - this.percentage[1]) +'%';
+			}
+			if (this.range) {
+				this.tooltipInner.text(
+					this.formater(this.value[0]) + 
+					' : ' + 
+					this.formater(this.value[1])
+				);
+				this.tooltip[0].style[this.stylePos] = this.size * (this.percentage[0] + (this.percentage[1] - this.percentage[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
+			} else {
+				this.tooltipInner.text(
+					this.formater(this.value[0])
+				);
+				this.tooltip[0].style[this.stylePos] = this.size * this.percentage[0]/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
+			}
+		},
 
 		mousedown: function(ev) {
-			
-			if (!this.dragLocked){
+
 			// Touch: Get the original event:
 			if (this.touchCapable && ev.type === 'touchstart') {
 				ev = ev.originalEvent;
@@ -224,7 +211,7 @@
 				this.dragged = 0;
 			}
 
-			this.percentage[this.dragged] = this.reversed ? this.percentage[1] - percentage : percentage;
+			this.percentage[this.dragged] = percentage;
 			this.layout();
 
 			if (this.touchCapable) {
@@ -242,54 +229,44 @@
 
 			this.inDrag = true;
 			var val = this.calculateValue();
-			
-			this.setValue(val);
 			this.element.trigger({
-				type: 'slideStart',
-				value: val
-			}).trigger({
-				type: 'slide',
-				value: val
-			});
+					type: 'slideStart',
+					value: val
+				}).trigger({
+					type: 'slide',
+					value: val
+				});
 			return false;
-			}
 		},
 
 		mousemove: function(ev) {
-			// Touch: Get the original event:
-			if (!this.dragLocked){
-				if (this.touchCapable && ev.type === 'touchmove') {
-					ev = ev.originalEvent;
-				}
-
-				var percentage = this.getPercentage(ev);
-				if (this.range) {
-					if (this.dragged === 0 && this.percentage[1] < percentage) {
-						this.percentage[0] = this.percentage[1];
-						this.dragged = 1;
-					} else if (this.dragged === 1 && this.percentage[0] > percentage) {
-						this.percentage[1] = this.percentage[0];
-						this.dragged = 0;
-					}
-				}
-				x = this.reversed ? this.percentage[1] - percentage : percentage;
-				if (x > this.limit) {
-					return ;
-				}
-				this.percentage[this.dragged] = x;
-				this.layout();
-				var val = this.calculateValue();
-				this.setValue(val);
 			
-				this.element
+			// Touch: Get the original event:
+			if (this.touchCapable && ev.type === 'touchmove') {
+				ev = ev.originalEvent;
+			}
+
+			var percentage = this.getPercentage(ev);
+			if (this.range) {
+				if (this.dragged === 0 && this.percentage[1] < percentage) {
+					this.percentage[0] = this.percentage[1];
+					this.dragged = 1;
+				} else if (this.dragged === 1 && this.percentage[0] > percentage) {
+					this.percentage[1] = this.percentage[0];
+					this.dragged = 0;
+				}
+			}
+			this.percentage[this.dragged] = percentage;
+			this.layout();
+			var val = this.calculateValue();
+			this.element
 				.trigger({
 					type: 'slide',
 					value: val
 				})
 				.data('value', val)
 				.prop('value', val);
-				return false;
-			}
+			return false;
 		},
 
 		mouseup: function(ev) {
@@ -312,7 +289,6 @@
 			}
 			this.element;
 			var val = this.calculateValue();
-			this.layout();
 			this.element
 				.trigger({
 					type: 'slideStop',
@@ -353,15 +329,7 @@
 			}
 			return this.value[0];
 		},
-		setLimit: function(val) {
-			this.limit = val;
-		},
-		setDragLocked: function(val) {
-			this.dragLocked = val;
-		},
-		getDragLocked: function(val) {
-			return this.dragLocked;
-		},
+
 		setValue: function(val) {
 			this.value = val;
 
@@ -384,11 +352,7 @@
 				this.step*100/this.diff
 			];
 			this.layout();
-		},
-		destroy: function(){
-			this.element.show().insertBefore(this.picker);
-			this.picker.remove();
-		},
+		}
 	};
 
 	$.fn.slider = function ( option, val ) {
@@ -414,9 +378,6 @@
 		selection: 'before',
 		tooltip: 'show',
 		handle: 'round',
-		reversed : false,
-		limit: 100000,
-		dragLocked: false,
 		formater: function(value) {
 			return value;
 		}

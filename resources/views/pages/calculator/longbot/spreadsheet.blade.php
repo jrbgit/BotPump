@@ -1,50 +1,17 @@
 @extends('layouts.default')
 
+@section('stylesheet')
+    <link rel="stylesheet" href="{{ asset('css/spreadsheet.css') }}">
+@endsection
+
 @section('content')
-    <style>
-        table th, table td {
-            position: relative;
-        }
-
-        table th input, table td input {
-            position: absolute;
-            display: block;
-            top:0;
-            left:0;
-            margin: 0;
-            height: 100%;
-            width: 100%;
-            border: none;
-            padding-top: 0px;
-            padding-bottom: 0px;
-            box-sizing: border-box;
-            background-color: #bdffff;
-        }
-
-        .row-orange {
-            background-color: #ffcb8e;
-        }
-        .row-sky {
-            background-color: #bdffff;
-        }
-        .row-yellow {
-            background-color: #fdff89;
-        }
-        .row-grey {
-            background-color: #fdff89;
-        }
-        .row-fire {
-            background-color: #ff8acc;
-        }
-    </style>
-
     <div class="box box-primary">
         <div class="box-header">
             <h3 class="box-title">Long Bot Calculation</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <table id="tbl_long" style="width: 100%;">
+            <table id="tbl_long">
                 <thead>
                 <tr style="color:#000;background-color: #bdffff;">
                     <th>Base Trade:</th>
@@ -55,10 +22,6 @@
                     <th style="width: 10%; background:#00FF00;color:#DB6600;">LONG BOT</th>
                     <th style="background:#808080;color:#ffffff;"></th>
                     <th style="background: #000000;" colspan="4"></th>
-                    <!--th>Base Trade:</th>
-                    <th><input type="text" name="base_trade_value" id="base_trade_value" disabled></th>
-                    <th>Safety Trade: </th>
-                    <th><input type="text" name="safety_trade_value" id="safety_trade_value" disabled></th-->
                 </tr>
 
                 <tr style="color:#000;background-color: #bdffff;">

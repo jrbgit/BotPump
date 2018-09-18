@@ -119,21 +119,23 @@
                 title: {
                     text: 'Total profit'
                 },
-                tickInterval: 0.00000001
+                tickInterval: 0.001
             },
             xAxis: {
-                categories: ['Both bot pair']
+                categories: ['Both bot profit']
             },
             credits: {
                 enabled: false
             },
             series: [
-                    @foreach($both as $item)
-                {
-                    name: '{{ $item->bot_name }}',
-                    data: [{{ $item->total_profit }}]
-                },
-                @endforeach
+                @for($i = 0; $i < sizeof($long); $i++)
+                    @if($i < 20)
+                    {
+                        name: '{{ $long[$i]->bot_name }}',
+                        data: [{{ $long[$i]->total_profit }}]
+                    },
+                    @endif
+                @endfor
             ]
         });
 
@@ -144,16 +146,27 @@
             title: {
                 text: 'Chart for profit by long pair'
             },
+            yAxis: {
+                title: {
+                    text: 'Total profit'
+                },
+                tickInterval: 0.001
+            },
+            xAxis: {
+                categories: ['Long bot profit']
+            },
             credits: {
                 enabled: false
             },
             series: [
-                    @foreach($long as $item)
-                {
-                    name: '{{ $item->bot_name }}',
-                    data: [{{ $item->total_profit }}]
-                },
-                @endforeach
+                @for($i = 0; $i < sizeof($long); $i++)
+                    @if($i < 20)
+                        {
+                            name: '{{ $long[$i]->bot_name }}',
+                            data: [{{ $long[$i]->total_profit }}]
+                        },
+                    @endif
+                @endfor
             ]
         });
 
@@ -164,16 +177,27 @@
             title: {
                 text: 'Chart for profit by short pair'
             },
+            yAxis: {
+                title: {
+                    text: 'Total profit'
+                },
+                tickInterval: 0.001
+            },
+            xAxis: {
+                categories: ['Short bot profit']
+            },
             credits: {
                 enabled: false
             },
             series: [
-                    @foreach($short as $item)
-                {
-                    name: '{{ $item->bot_name }}',
-                    data: [{{ $item->total_profit }}]
-                },
-                @endforeach
+                @for($i = 0; $i < sizeof($short); $i++)
+                    @if($i < 20)
+                        {
+                            name: '{{ $short[$i]->bot_name }}',
+                            data: [{{ $short[$i]->total_profit }}]
+                        },
+                    @endif
+                @endfor
             ]
         });
     </script>

@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{{ asset('css/font-awesome/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/ionicons/ionicons.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-slider/slider.css') }}">
+
     <link rel="stylesheet" href="{{ asset('css/datatables.net-bs/dataTables.bootstrap.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/highcharts/highcharts.css') }}">
@@ -20,6 +22,8 @@
     <link rel="stylesheet" href="{{ asset('css/w3.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+    @yield('stylesheet')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -91,6 +95,8 @@
     <script src="{{ asset('js/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 
     <script src="{{ asset('js/adminlte/adminlte.min.js') }}"></script>
+
+    <script src="{{ asset('js/bootstrap-slider/bootstrap-slider.js') }}"></script>
 
     @yield('script')
 

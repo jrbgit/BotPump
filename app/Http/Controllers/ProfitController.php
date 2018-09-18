@@ -34,13 +34,15 @@ class ProfitController extends Controller
                     FROM deals
                     LEFT JOIN bots ON bots.id = deals.bot_id
                     WHERE deals.pair IS NOT NULL AND deals.api_key_id = '$api_key'
-                    GROUP BY $group";
+                    GROUP BY $group
+                    ORDER BY total_profit DESC";
         }else{
             $sql = "SELECT SUM(deals.final_profit) total_profit, $field, COUNT(*) count
                     FROM `deals`
                     LEFT JOIN bots ON bots.id = deals.bot_id
                     WHERE bots.strategy = '$type'
-                    GROUP BY $group";
+                    GROUP BY $group
+                    ORDER BY total_profit DESC";
         }
         return $sql;
     }
