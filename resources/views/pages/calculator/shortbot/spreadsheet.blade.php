@@ -92,7 +92,7 @@
                        data-slider-step="1" data-slider-value="25" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
             </div>
 
-            <table id="tbl_short" class="table table-bordered table-striped table-hover">
+            <table id="tbl_short" class="table table-bordered table-striped table-hover-blue">
                 <thead>
                     <th>SO#</th>
                     <th>SO SCALE%</th>

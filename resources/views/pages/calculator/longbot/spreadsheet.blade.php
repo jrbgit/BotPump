@@ -11,106 +11,108 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <table id="tbl_long">
+            <div class="form-group col-md-4">
+                <label for="base_trade">Base Trade:</label>
+                <input class="form-control" onkeyup="submitUpdate()" type="text" name="base_trade" id="base_trade" value="0.0011">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="target_profit">Target Profit:</label>
+                <input class="form-control" onkeyup="submitUpdate()" type="text" name="target_profit" id="target_profit" value="2.50">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="deviation">Deviation:</label>
+                <input class="form-control" onkeyup="submitUpdate()" type="text" name="deviation" id="deviation" value="0.50">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="safety_trade">Safety Trade:</label>
+                <input class="form-control" onkeyup="submitUpdate()" type="text" name="safety_trade" id="safety_trade" value="0.0055">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="safety_vol">Safety Vol:</label>
+                <input class="form-control" onkeyup="submitUpdate()" type="text" name="safety_vol" id="safety_vol" value="1.51">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="safety_step">Safety % Step:</label>
+                <input class="form-control" onkeyup="submitUpdate()" type="text" name="safety_step" id="safety_step" value="1.50">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="g3">ADA Free Coin:</label>
+                <input class="form-control" onkeyup="submitUpdate()" type="text" name="g3" id="g3" value="10000">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="btc_price">BTC Price:</label>
+                <input class="form-control" onkeyup="submitUpdate()" type="text" name="btc_price" id="btc_price" value="7651">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="base_order_5">Buy Price:</label>
+                <input class="form-control" onkeyup="submitUpdate()" type="text" name="buy_price" id="buy_price" value="0.00001797">
+            </div>
+
+            <div class="form-group col-md-2">
+                <label>Total Vol:</label>
+                <span id="base_order_1"></span>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label>BTC/DEAL:</label>
+                <span id="base_order_2"></span>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label>Profit:</label>
+                <span id="base_order_3"></span>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label>Buy Price:</label>
+                <span id="buy_price2"></span>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label>Ave Price:</label>
+                <span id="ave_price"></span>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label>Sell Price:</label>
+                <span id="sell_price"></span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="base_order_5">Max Safety Trades Count: <span id="span_count">25</span></label>
+                <input type="text" class="form-control" name="safety_trade_count" id="safety_trade_count" value="" data-slider-min="0" data-slider-max="100"
+                       data-slider-step="1" data-slider-value="25" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
+            </div>
+
+            <table id="tbl_long" class="table table-bordered table-striped table-hover-blue">
                 <thead>
-                <tr style="color:#000;background-color: #bdffff;">
-                    <th>Base Trade:</th>
-                    <th style="width: 10%;"><input onkeyup="ValidateBaseTrade()" type="text" name="base_trade" id="base_trade" value="0.001"></th>
-                    <th style="width: 10%;font-size: 12px; font-weight: 100;">0.001=minimum</th>
-                    <th>Safety Trade:</th>
-                    <th style="width: 10%;"><input onkeyup="submitUpdate()" type="text" name="safety_trade" id="safety_trade" value="0.010"></th>
-                    <th style="width: 10%; background:#00FF00;color:#DB6600;">LONG BOT</th>
-                    <th style="background:#808080;color:#ffffff;"></th>
-                    <th style="background: #000000;" colspan="4"></th>
-                </tr>
-
-                <tr style="color:#000;background-color: #bdffff;">
-                    <th style="color:#000;background-color: #bdffff;">Target Profit:</th>
-                    <th style="color:#000;background-color: #bdffff;"><input onkeyup="submitUpdate()" type="text" name="target_profit" id="target_profit" value="10.00"></th>
-                    <th style="color:#000;background-color: #bdffff;"></th>
-                    <th>Deviation:</th>
-                    <th><input onkeyup="submitUpdate()" type="text" name="deviation" id="deviation" value="5.00"></th>
-                    <th>BTC Price</th>
-                    <th style="background:#808080;color:#ffffff;"></th>
-                    <th style="background: #000;" colspan="4"></th>
-                    <!--th>Target Profit</th>
-                    <th><input type="text" name="target_profit_value" id="target_profit_value" disabled></th>
-                    <th>Deviation:</th>
-                    <th><input type="text" name="deviation_value" id="deviation_value" disabled></th-->
-                </tr>
-
-                <tr style="color:#000;background-color: #bdffff;">
-                    <th>Safety Vol:</th>
-                    <th><input onkeyup="submitUpdate()" type="text" name="safety_vol" id="safety_vol" value="1.51"></th>
-                    <th></th>
-                    <th>Safety % Step:</th>
-                    <th><input onkeyup="submitUpdate()" type="text" name="safety_step" id="safety_step" value="0.90"></th>
-                    <th><span style="float:left;color:#333399;width: 10px;padding: 1px 0px;font-size: 20px;">$</span><input onkeyup="submitUpdate()" style="width:80%;float:left;" type="text" name="free_coinPrice" id="free_coinPrice" value="7000"></th>
-                    <th style="background:#808080;color:#ffffff;"></th>
-                    <th style="background: #000;" colspan="4"></th>
-                    <!--th>Safety Vol</th>
-                    <th><input type="text" name="safety_vol_value" id="safety_vol_value" disabled></th>
-                    <th>Safety % Step:</th>
-                    <th><input type="text" name="safety_step_value" id="safety_step_value" disabled></th-->
-                </tr>
-
-                <tr style="color:#000;background-color: #bdffff;">
-                    <th colspan="4" style="color: #0000ff;">ALL eight blue numbers are user changeable.</th>
-                    <th>Max Safety:</th>
-                    <th><input onkeyup="submitUpdate()" type="text" name="safety_trade_count" id="safety_trade_count" value="5"></th>
-                    <th style="background:#808080;color:#ffffff;"></th>
-                    <th style="width: 12%; background: #000;color:#00FF00;">Buy Price</th>
-                    <th style="width: 12%; background: #000;color:#FFCC00;">Ave Price</th>
-                    <th style="width: 12%; background: #000;color:#ff0000;">Sell Price</th>
-                    <th></th>
-                </tr>
-
-                <tr>
-                    <th style="background: #000;color:#fff;"></th>
-                    <th style="background: #000;color:#fff;"></th>
-                    <th style="background: #CCFFCC;">Base Order:</th>
-                    <th style="background: #CCFFCC;">
-                        <input type="text" style="background: #CCFFCC;" name="base_order_1" id="base_order_1" disabled>
-                    </th>
-                    <th style="background: #CCFFCC;">
-                        <input type="text" style="background: #CCFFCC;" name="base_order_2" id="base_order_2" disabled>
-                    </th>
-                    <th style="background: #CCFFCC;">
-                        <input type="text" style="background: #CCFFCC;" name="base_order_3" id="base_order_3" disabled>
-                    </th>
-                    <th style="background:#808080;color:#ffffff;">BO</th>
-                    <th style="background: #CCFFCC;">
-                        <input onkeyup="submitUpdate()" type="text" name="buy_price" id="buy_price" value="0.00000471">
-                    </th>
-                    <th style="background: #CCFFCC;">
-                        <input type="text" name="ave_price" id="ave_price" disabled class="greecolor"><
-                        /th>
-                    <th style="background: #CCFFCC;">
-                        <input type="text" name="sell_price" id="sell_price" disabled class="greecolor">
-                    </th>
-                </tr>
-
-                <tr style="background: #000;color:#fff;height: 40px;">
-                    <th>SO SCALE %</th>
+                    <th>SO#</th>
+                    <th>SO SCALE%</th>
                     <th>SO SIZE</th>
-                    <th>SO #</th>
-                    <th>TOTAL -%</th>
+                    <th>TOTAL%</th>
                     <th>BTC/DEAL</th>
                     <th>PROFIT</th>
-                    <th style="background: #808080; color: #ffffff;">SO</th>
-                    <th></th>
-                    <th>LONG BOT</th>
-                    <th></th>
-                </tr>
+                    <th>Buy Price</th>
+                    <th>Ave Price</th>
+                    <th>Sell Price</th>
                 </thead>
                 <tbody>
-                    <tr id="tbl_long_foot" style='background: #000;color:#fff;'>
-                        <td colspan='4'></td>
-                        <td >BTC/DEAL</td>
-                        <td>PROFIT</td>
-                        <td colspan='4'></td>
-                    </tr>
+
                 </tbody>
+                <tfoot>
+                    <th colspan="4"></th>
+                    <th>BTC/DEAL</th>
+                    <th>PROFIT</th>
+                    <th colspan="3"></th>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -119,6 +121,12 @@
 @section('script')
     <script>
         $(function() {
+            var safetySlider = $('#safety_trade_count').slider();
+            safetySlider.on('slide', function (e) {
+                var value = safetySlider.data('slider').getValue();
+                $('#span_count').html(value);
+                UpdateSafetyTrade();
+            });
             UpdateSafetyTrade();
         });
 
@@ -136,24 +144,27 @@
         }
 
         function UpdateSafetyTrade() {
+            $('#tbl_long tbody').empty();
             $('tr.newaddedrow').remove();
-            $('#base_order_1').val('0.00');
-            $('#base_order_2').val($('#base_trade').val());
-            $('#base_order_3').val($('#base_trade').val());
+            $('#base_order_1').text('0.00');
+            $('#base_order_2').text($('#base_trade').val());
+            $('#base_order_3').text($('#base_trade').val());
             $('#base_trade_value').val($('#base_trade').val());
             $('#safety_trade_value').val($('#safety_trade').val());
             $('#target_profit_value').val($('#target_profit').val());
             $('#deviation_value').val($('#deviation').val());
             $('#safety_vol_value').val($('#safety_vol').val());
             $('#safety_step_value').val($('#safety_step').val());
-            $('#ave_price').val($('#buy_price').val());
+            $('#ave_price').text($('#buy_price').val());
             var buyPrice = $('#buy_price').val();
+            $('#buy_price2').text(buyPrice);
             var targetProfit = parseFloat($('#target_profit').val()) + 0.2;
             var sell_price = (buyPrice * (100 + targetProfit)) / 100;
-            $('#sell_price').val(sell_price.toFixed(8));
+            $('#sell_price').text(sell_price.toFixed(8));
 
-            var k = 0;
-            var safety_trade_count = parseInt($('#safety_trade_count').val());
+            //var safety_trade_count = parseInt($('#safety_trade_count').val());
+            var safety_trade_count = $('#safety_trade_count').data('slider').getValue();
+
             for (var i = 0; i < safety_trade_count; i++) {
                 if (i > 0) {
                     var BH4Old = BH4;
@@ -161,7 +172,7 @@
                     var BH2 = parseFloat(BH2 * parseFloat($('#safety_vol').val()));
                     var BH3 = parseFloat(BH1 + BH3);
                     var BH4 = parseFloat(BH2 + BH4);
-                    var BH5 = parseFloat((BH4 * parseFloat($('#target_profit').val()) / 100) * parseFloat($('#free_coinPrice').val()));
+                    var BH5 = parseFloat((BH4 * parseFloat($('#target_profit').val()) / 100) * parseFloat($('#btc_price').val()));
                     var BH6 = parseFloat((BH6 * (100 - BH1)) / 100);
                     var BH7 = parseFloat(((BH7 * BH4Old) + (BH6 * BH2)) / BH4);
                     var BH8 = parseFloat((BH7 * (100 + (parseFloat($('#target_profit').val()) + 0.2))) / 100);
@@ -169,15 +180,15 @@
                     var BH1 = parseFloat($('#deviation').val());
                     var BH2 = parseFloat($('#safety_trade').val());
                     var BH3 = parseFloat(BH1);
-                    var BH4 = parseFloat($('#base_order_2').val()) + BH2;
+                    var BH4 = parseFloat($('#base_order_2').text()) + BH2;
 
                     var BH5_1 = parseFloat($('#target_profit').val()) / 100;
                     var BH5_11 = parseFloat(BH4 * BH5_1);
-                    var BH5_2 = parseFloat($('#free_coinPrice').val());
+                    var BH5_2 = parseFloat($('#btc_price').val());
                     var BH5 = parseFloat(BH5_11 * BH5_2);
 
                     var BH6 = parseFloat((parseFloat($('#buy_price').val()) * (100 - BH1)) / 100);
-                    var BH7 = parseFloat(((parseFloat($('#ave_price').val()) * parseFloat($('#base_order_2').val())) + (BH6 * BH2)) / BH4);
+                    var BH7 = parseFloat(((parseFloat($('#ave_price').text()) * parseFloat($('#base_order_2').text())) + (BH6 * BH2)) / BH4);
                     var BH8 = parseFloat((BH7 * (100 + (parseFloat($('#target_profit').val()) + 0.2))) / 100);
                 }
 
@@ -206,7 +217,21 @@
                     "<td >" + BH7.toFixed(8) + "</td>" +
                     "<td class='redcolor'>" + BH8.toFixed(8) + "</td>" +
                     "</tr>";
+
+                var newRow =
+                    "<tr>" +
+                    "<td>" + (i + 1) + "</td>" +
+                    "<td>" + BH1.toFixed(2) + "</td>" +
+                    "<td>" + BH2.toFixed(4) + "</td>" +
+                    "<td>" + BH3.toFixed(2) + "</td>" +
+                    "<td>" + BH4.toFixed(5) + "</td>" +
+                    "<td>" + "$" + BH5.toFixed(2) + "</td>" +
+                    "<td>" + BH6.toFixed(8) + "</td>" +
+                    "<td>" + BH7.toFixed(8) + "</td>" +
+                    "<td>" + BH8.toFixed(8) + "</td>" +
+                    "</tr>";
                 $("#tbl_long_foot").before(newROW);
+                $('#tbl_long tbody').append(newRow);
             }
         }
     </script>

@@ -21,7 +21,7 @@
                 <div id="chart_both" style="min-width: 310px; min-height: 400px; height: 100%; margin: 0 auto"></div>
             </div>
             <div class="content table">
-                <table id ="tbl_both" class="table table-bordered table-striped">
+                <table id ="tbl_both" class="table table-bordered table-striped table-hover-blue">
                     <thead>
                         <th>#</th>
                         <th>Bot Name</th>
@@ -51,7 +51,7 @@
                 <div id="chart_long" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             </div>
             <div class="content table">
-                <table id ="tbl_long" class="table table-bordered table-striped">
+                <table id ="tbl_long" class="table table-bordered table-striped table-hover-blue">
                     <thead>
                     <th>#</th>
                     <th>Bot Name</th>
@@ -79,7 +79,7 @@
                 <div id="chart_short" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             </div>
             <div class="content table">
-                <table id ="tbl_short" class="table table-bordered table-striped">
+                <table id ="tbl_short" class="table table-bordered table-striped table-hover-blue">
                     <thead>
                     <th>#</th>
                     <th>Bot Name</th>
@@ -112,6 +112,11 @@
             chart: {
                 type: 'column'
             },
+            plotOptions: {
+                column: {
+                    groupPadding: 0
+                }
+            },
             title: {
                 text: 'Chart for profit by both pair'
             },
@@ -143,6 +148,11 @@
             chart: {
                 type: 'column'
             },
+            plotOptions: {
+                column: {
+                    groupPadding: 0
+                }
+            },
             title: {
                 text: 'Chart for profit by long pair'
             },
@@ -173,6 +183,11 @@
         Highcharts.chart('chart_short', {
             chart: {
                 type: 'column'
+            },
+            plotOptions: {
+                column: {
+                    groupPadding: 0
+                }
             },
             title: {
                 text: 'Chart for profit by short pair'
