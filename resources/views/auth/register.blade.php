@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/adminlte/AdminLTE.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/adminlte/skins/skin-blue.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('plugins/iCheck/square/blue.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/icheck/square/blue.css') }}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -94,7 +94,7 @@
 <script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/adminlte/adminlte.min.js') }}"></script>
-<script src="{{ asset('plugins/iCheck/icheck.min.js') }}"></script>
+<script src="{{ asset('plugins/icheck/icheck.min.js') }}"></script>
 <script>
     $(function () {
         $('input').iCheck({
