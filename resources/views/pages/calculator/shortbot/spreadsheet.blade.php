@@ -20,15 +20,12 @@
                 <label for="target_profit">Target Profit: <input type="text" class="form-control" style="width: 60px; display: inline;" onkeyup="changeSafetyCount('target_profit', $(this).val())" value="2.5" id="val_target_profit"></label>
                 <input type="text" class="form-control col-md-10" name="target_profit" id="target_profit" value="" data-slider-min="0" data-slider-max="10"
                        data-slider-step="0.5" data-slider-value="2.5" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
-                <!--input class="form-control" onkeyup="submitUpdate()" type="text" name="target_profit" id="target_profit" value="2.50"-->
             </div>
 
             <div class="form-group col-md-4">
                 <label for="deviation">Deviation: <input type="text" class="form-control" style="width: 60px; display: inline;" onkeyup="changeSafetyCount('deviation', $(this).val())" value="0.5" id="val_deviation"></label>
                 <input type="text" class="form-control col-md-10" name="deviation" id="deviation" value="" data-slider-min="0" data-slider-max="10"
                        data-slider-step="0.1" data-slider-value="0.5" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
-
-                <!--input class="form-control" onkeyup="submitUpdate()" type="text" name="deviation" id="deviation" value="0.50"-->
             </div>
 
             <div class="form-group col-md-4">
@@ -37,13 +34,15 @@
             </div>
 
             <div class="form-group col-md-4">
-                <label for="safety_vol">Safety Vol:</label>
-                <input class="form-control" onkeyup="submitUpdate()" type="text" name="safety_vol" id="safety_vol" value="1.51">
+                <label for="safety_vol">Safety Vol: <input type="text" class="form-control" style="width: 60px; display: inline;" onkeyup="changeSafetyCount('safety_vol', $(this).val())" value="0.5" id="val_safety_vol"></label>
+                <input type="text" class="form-control col-md-10" name="safety_vol" id="safety_vol" value="" data-slider-min="0" data-slider-max="10"
+                       data-slider-step="0.1" data-slider-value="1.51" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
             </div>
 
             <div class="form-group col-md-4">
-                <label for="safety_step">Safety % Step:</label>
-                <input class="form-control" onkeyup="submitUpdate()" type="text" name="safety_step" id="safety_step" value="1.50">
+                <label for="safety_step">Safety % Step: <input type="text" class="form-control" style="width: 60px; display: inline;" onkeyup="changeSafetyCount('safety_step', $(this).val())" value="0.5" id="val_safety_step"></label>
+                <input type="text" class="form-control col-md-10" name="safety_vol" id="safety_step" value="" data-slider-min="0" data-slider-max="10"
+                       data-slider-step="0.1" data-slider-value="1.51" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
             </div>
 
             <div class="form-group col-md-4">
@@ -92,7 +91,7 @@
             </div>
 
             <div class="form-group col-md-6">
-                <label for="base_order_5">Max Safety Trades Count: <input type="text" class="form-control" style="width: 55px; display: inline;" onkeyup="changeSafetyCount('safety_trade_count')" value="25" id="val_safety_trade_count"></label>
+                <label for="base_order_5">Max Safety Trades Count: <input type="text" class="form-control" style="width: 55px; display: inline;" onkeyup="changeSafetyCount('safety_trade_count', $(this).val())" value="25" id="val_safety_trade_count"></label>
                 <input type="text" class="form-control col-md-10" name="safety_trade_count" id="safety_trade_count" value="" data-slider-min="0" data-slider-max="100"
                        data-slider-step="1" data-slider-value="25" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
             </div>
@@ -123,7 +122,7 @@
                     <th><span style="font-weight: 100; font-size: 12px;">Max safe order price deviation</span></th>
                     <th>BTC/DEAL</th>
                     <th>PROFIT</th>
-                    <th colspan="5">NOTE: these satoshi prices are NOT exact = "ballpark" numbers</th>
+                    <th colspan="5" style="font-weight: 100; text-align: right;">NOTE: these satoshi prices are NOT exact = "ballpark" numbers</th>
                 </tfoot>
             </table>
         </div>
@@ -153,6 +152,20 @@
             target_profit.on('slide', function (e) {
                 var value = target_profit.data('slider').getValue();
                 $('#val_target_profit').val(value.toFixed(1));
+                UpdateSafetyTrade();
+            });
+
+            var safety_vol = $('#safety_vol').slider();
+            safety_vol.on('slide', function (e) {
+                var value = safety_vol.data('slider').getValue();
+                $('#val_safety_vol').val(value.toFixed(1));
+                UpdateSafetyTrade();
+            });
+
+            var safety_step = $('#safety_step').slider();
+            safety_step.on('slide', function (e) {
+                var value = safety_step.data('slider').getValue();
+                $('#val_safety_step').val(value.toFixed(1));
                 UpdateSafetyTrade();
             });
 
@@ -192,13 +205,13 @@
             //var safety_trade_count = parseInt($('#safety_trade_count').val());
             var safety_trade_count = $('#safety_trade_count').data('slider').getValue();
 
-            var E3 = parseFloat($('#safety_step').val());
+            var E3 = parseFloat($('#val_safety_step').val());
 
             for (var i = 0; i < safety_trade_count; i++) {
                 if (i > 0) {
                     var BH4OLD = BH4;
                     var BH1 = BH1 * E3;
-                    var BH2 = BH2 * parseFloat($('#safety_vol').val());
+                    var BH2 = BH2 * parseFloat($('#val_safety_vol').val());
                     var BH3 = BH3 + BH1;
                     var BH4 = BH4 + BH2;
                     var BH5 = (BH4 * (parseFloat($('#val_target_profit').val()) / 100)) * parseFloat($('#btc_price').val());
