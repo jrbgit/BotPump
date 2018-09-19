@@ -101,7 +101,7 @@
     @yield('script')
 
     @if (session()->has('load_deal'))
-        <!--script>
+        <script>
             $.get('{{ route('3commas/loadDeal') }}', function (response) {
                 console.log(response);
                 alert('data load succeed');
@@ -111,7 +111,7 @@
                 console.log(response);
                 alert('data load succeed');
             });
-        </script-->
+        </script>
     @endif
 
 </body>
