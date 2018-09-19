@@ -17,13 +17,18 @@
             </div>
 
             <div class="form-group col-md-4">
-                <label for="target_profit">Target Profit:</label>
-                <input class="form-control" onkeyup="submitUpdate()" type="text" name="target_profit" id="target_profit" value="2.50">
+                <label for="target_profit">Target Profit: <input type="text" class="form-control" style="width: 60px; display: inline;" onkeyup="changeSafetyCount('target_profit', $(this).val())" value="2.5" id="val_target_profit"></label>
+                <input type="text" class="form-control col-md-10" name="target_profit" id="target_profit" value="" data-slider-min="0" data-slider-max="10"
+                       data-slider-step="0.5" data-slider-value="2.5" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
+                <!--input class="form-control" onkeyup="submitUpdate()" type="text" name="target_profit" id="target_profit" value="2.50"-->
             </div>
 
             <div class="form-group col-md-4">
-                <label for="deviation">Deviation:</label>
-                <input class="form-control" onkeyup="submitUpdate()" type="text" name="deviation" id="deviation" value="0.50">
+                <label for="deviation">Deviation: <input type="text" class="form-control" style="width: 60px; display: inline;" onkeyup="changeSafetyCount('deviation', $(this).val())" value="0.5" id="val_deviation"></label>
+                <input type="text" class="form-control col-md-10" name="deviation" id="deviation" value="" data-slider-min="0" data-slider-max="10"
+                       data-slider-step="0.1" data-slider-value="0.5" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
+
+                <!--input class="form-control" onkeyup="submitUpdate()" type="text" name="deviation" id="deviation" value="0.50"-->
             </div>
 
             <div class="form-group col-md-4">
@@ -87,9 +92,13 @@
             </div>
 
             <div class="form-group col-md-6">
-                <label for="base_order_5">Max Safety Trades Count: <span id="span_count">25</span></label>
-                <input type="text" class="form-control" name="safety_trade_count" id="safety_trade_count" value="" data-slider-min="0" data-slider-max="100"
+                <label for="base_order_5">Max Safety Trades Count: <input type="text" class="form-control" style="width: 55px; display: inline;" onkeyup="changeSafetyCount('safety_trade_count')" value="25" id="val_safety_trade_count"></label>
+                <input type="text" class="form-control col-md-10" name="safety_trade_count" id="safety_trade_count" value="" data-slider-min="0" data-slider-max="100"
                        data-slider-step="1" data-slider-value="25" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
+            </div>
+
+            <div class="form-group col-md-2">
+
             </div>
 
             <table id="tbl_short" class="table table-bordered table-striped table-hover-blue">
@@ -129,11 +138,31 @@
             safetySlider.on('slide', function (e) {
                 var value = safetySlider.data('slider').getValue();
                 $('#span_count').html(value);
+                $('#val_safety_trade_count').val(value);
+                UpdateSafetyTrade();
+            });
+
+            var deviation = $('#deviation').slider();
+            deviation.on('slide', function (e) {
+                var value = deviation.data('slider').getValue();
+                $('#val_deviation').val(value.toFixed(1));
+                UpdateSafetyTrade();
+            });
+
+            var target_profit = $('#target_profit').slider();
+            target_profit.on('slide', function (e) {
+                var value = target_profit.data('slider').getValue();
+                $('#val_target_profit').val(value.toFixed(1));
                 UpdateSafetyTrade();
             });
 
             UpdateSafetyTrade();
         });
+
+        function changeSafetyCount(slider, value) {
+            $('#'+slider).slider().data('slider').setValue(value);
+            UpdateSafetyTrade();
+        }
 
         function submitUpdate() {
             UpdateSafetyTrade();
@@ -142,7 +171,7 @@
         function UpdateSafetyTrade() {
             $('#tbl_short tbody').empty();
             $('tr.newaddedrow').remove();
-            var B2 = parseFloat($('#target_profit').val());
+            var B2 = parseFloat($('#val_target_profit').val());
             var E5 = parseFloat($('#base_trade').val());
             var F3 = parseFloat($('#btc_price').val());
             var base_order_2 = ((E5 * (B2 / 100)) * F3).toFixed(2);
@@ -172,7 +201,7 @@
                     var BH2 = BH2 * parseFloat($('#safety_vol').val());
                     var BH3 = BH3 + BH1;
                     var BH4 = BH4 + BH2;
-                    var BH5 = (BH4 * (parseFloat($('#target_profit').val()) / 100)) * parseFloat($('#btc_price').val());
+                    var BH5 = (BH4 * (parseFloat($('#val_target_profit').val()) / 100)) * parseFloat($('#btc_price').val());
                     var BH8 = BH8 * (100 + BH1) / 100;
                     var BH7 = BH2 / BH8;
                     var BH6 = BH7 + BH6;
@@ -182,13 +211,13 @@
                     var BH9_C = parseFloat(BH9_A + BH9_B);
                     var BH9 = parseFloat(BH9_C / BH4);
 
-                    var BH10 = (BH9 * (100 - (parseFloat($('#target_profit').val()) + 0.2))) / 100;
+                    var BH10 = (BH9 * (100 - (parseFloat($('#val_target_profit').val()) + 0.2))) / 100;
                 } else {
-                    var BH1 = parseFloat($('#deviation').val());
+                    var BH1 = parseFloat($('#val_deviation').val());
                     var BH2 = parseFloat($('#safety_trade').val());
                     var BH3 = BH1;
                     var BH4 = parseFloat($('#base_order_1').val()) + BH2;
-                    var BH5 = (BH4 * (parseFloat($('#target_profit').val()) / 100)) * parseFloat($('#btc_price').val());
+                    var BH5 = (BH4 * (parseFloat($('#val_target_profit').val()) / 100)) * parseFloat($('#btc_price').val());
                     var BH8 = parseFloat($('#base_order_5').val()) * (100 + BH1) / 100;
                     var BH7 = BH2 / BH8;
                     var BH6 = BH7 + parseFloat($('#base_order_3').text());
@@ -198,7 +227,7 @@
                     var BH9_C = parseFloat(BH9_A + BH9_B);
                     var BH9 = parseFloat(BH9_C / BH4);
 
-                    var BH10 = (BH9 * (100 - (parseFloat($('#target_profit').val()) + 0.2))) / 100;
+                    var BH10 = (BH9 * (100 - (parseFloat($('#val_target_profit').val()) + 0.2))) / 100;
                 }
 
                 var row = "";
