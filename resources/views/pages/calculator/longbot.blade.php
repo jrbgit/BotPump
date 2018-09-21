@@ -18,14 +18,14 @@
 
             <div class="form-group col-md-4">
                 <label for="target_profit">Target Profit: <input type="text" class="form-control" style="width: 60px; display: inline;" onkeyup="changeSliderValue('long', 'target_profit', $(this).val())" value="2.5" id="val_target_profit"></label>
-                <input type="text" class="form-control slider" name="target_profit" id="target_profit" value="" data-slider-min="0" data-slider-max="10"
-                       data-slider-step="0.5" data-slider-value="2.5" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
+                <input type="text" class="form-control slider" name="target_profit" id="target_profit" value="" data-slider-min="0.2" data-slider-max="10"
+                       data-slider-step="0.01" data-slider-value="2.5" data-slider-id="GC" data-slider-tooltip="show" data-slider-handle="round" >
             </div>
 
             <div class="form-group col-md-4">
                 <label for="deviation">Deviation: <input type="text" class="form-control" style="width: 60px; display: inline;" onkeyup="changeSliderValue('long', 'deviation', $(this).val())" value="0.5" id="val_deviation"></label>
-                <input type="text" class="form-control slider" name="deviation" id="deviation" value="" data-slider-min="0" data-slider-max="10"
-                       data-slider-step="0.1" data-slider-value="0.5" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
+                <input type="text" class="form-control slider" name="deviation" id="deviation" value="" data-slider-min="0.21" data-slider-max="10"
+                       data-slider-step="0.01" data-slider-value="0.5" data-slider-id="GC" data-slider-tooltip="show" data-slider-handle="round" >
             </div>
 
             <div class="form-group col-md-4">
@@ -35,14 +35,14 @@
 
             <div class="form-group col-md-4">
                 <label for="safety_vol">Safety Vol: <input type="text" class="form-control" style="width: 60px; display: inline;" onkeyup="changeSliderValue('long', 'safety_vol', $(this).val())" value="1.51" id="val_safety_vol"></label>
-                <input type="text" class="form-control slider" name="safety_vol" id="safety_vol" value="" data-slider-min="0" data-slider-max="10"
-                       data-slider-step="0.1" data-slider-value="1.51" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
+                <input type="text" class="form-control slider" name="safety_vol" id="safety_vol" value="" data-slider-min="0.1" data-slider-max="10"
+                       data-slider-step="0.01" data-slider-value="1.51" data-slider-id="GC" data-slider-tooltip="show" data-slider-handle="round" >
             </div>
 
             <div class="form-group col-md-4">
                 <label for="safety_step">Safety % Step: <input type="text" class="form-control" style="width: 60px; display: inline;" onkeyup="changeSliderValue('long', 'safety_step', $(this).val())" value="0.5" id="val_safety_step"></label>
-                <input type="text" class="form-control slider" name="safety_vol" id="safety_step" value="" data-slider-min="0" data-slider-max="10"
-                       data-slider-step="0.1" data-slider-value="1.51" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
+                <input type="text" class="form-control slider" name="safety_vol" id="safety_step" value="" data-slider-min="0.1" data-slider-max="10"
+                       data-slider-step="0.01" data-slider-value="1.51" data-slider-id="GC" data-slider-tooltip="show" data-slider-handle="round" >
             </div>
 
             <div class="form-group col-md-4">
@@ -93,7 +93,7 @@
             <div class="form-group col-md-6">
                 <label for="base_order_5">Max Safety Trades Count: <input type="text" class="form-control" style="width: 55px; display: inline;" onkeyup="changeSliderValue('long', 'safety_trade_count', $(this).val())" value="25" id="val_safety_trade_count"></label>
                 <input type="text" class="form-control slider" name="safety_trade_count" id="safety_trade_count" value="" data-slider-min="0" data-slider-max="100"
-                       data-slider-step="1" data-slider-value="25" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
+                       data-slider-step="1" data-slider-value="25" data-slider-id="GC" data-slider-tooltip="show" data-slider-handle="round" >
             </div>
 
             <table id="tbl_long" class="table table-bordered table-striped table-hover-blue">

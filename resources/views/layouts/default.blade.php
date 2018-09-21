@@ -13,6 +13,8 @@
 
     <link rel="stylesheet" href="{{ asset('css/datatables.net-bs/dataTables.bootstrap.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/select2/select2.min.css') }}">
+
     <link rel="stylesheet" href="{{ asset('css/highcharts/highcharts.css') }}">
 
     <!-- Theme style -->
@@ -92,6 +94,8 @@
 
     <script src="{{ asset('js/highcharts/highcharts.js') }}"></script>
 
+    <script src="{{ asset('js/select2/select2.min.js') }}"></script>
+
     <script src="{{ asset('js/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 
     <script src="{{ asset('js/adminlte/adminlte.min.js') }}"></script>
@@ -101,7 +105,7 @@
     @yield('script')
 
     @if (session()->has('load_deal'))
-        <script>
+        <!--script>
             $.get('{{ route('3commas/loadDeal') }}', function (response) {
                 console.log(response);
                 alert('data load succeed');
@@ -111,7 +115,7 @@
                 console.log(response);
                 alert('data load succeed');
             });
-        </script>
+        </script-->
     @endif
 
 </body>

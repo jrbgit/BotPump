@@ -7,7 +7,7 @@
 @section('content')
     <div class="box box-primary">
         <div class="box-header">
-            <h3 class="box-title">Short Bot Calculation Spreadsheet</h3>
+            <h3 class="box-title">Short Bot Calculation</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -17,15 +17,15 @@
             </div>
 
             <div class="form-group col-md-4">
-                <label for="target_profit">Target Profit: <input type="text" class="form-control" style="width: 60px; display: inline;" onkeyup="changeSliderValue('short', 'target_profit', $(this).val())" value="2.5" id="val_target_profit"></label>
-                <input type="text" class="form-control slider" name="target_profit" id="target_profit" value="" data-slider-min="0" data-slider-max="10"
-                       data-slider-step="0.5" data-slider-value="2.5" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
+                <label for="target_profit">Target Profit: <input type="text" class="form-control" style="width: 60px; display: inline;" onkeyup="changeSliderValue('short', 'target_profit', $(this).val())" min="0.2" max="10" value="2.5" id="val_target_profit"></label>
+                <input type="text" class="form-control slider" name="target_profit" id="target_profit" value="" data-slider-min="0.2" data-slider-max="10"
+                       data-slider-step="0.01" data-slider-value="2.5" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
             </div>
 
             <div class="form-group col-md-4">
                 <label for="deviation">Deviation: <input type="text" class="form-control" style="width: 60px; display: inline;" onkeyup="changeSliderValue('short', 'deviation', $(this).val())" value="0.5" id="val_deviation"></label>
-                <input type="text" class="form-control slider" name="deviation" id="deviation" value="" data-slider-min="0" data-slider-max="10"
-                       data-slider-step="0.1" data-slider-value="0.5" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
+                <input type="text" class="form-control slider" name="deviation" id="deviation" value="" data-slider-min="0.21" data-slider-max="10"
+                       data-slider-step="0.01" data-slider-value="0.5" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
             </div>
 
             <div class="form-group col-md-4">
@@ -35,14 +35,14 @@
 
             <div class="form-group col-md-4">
                 <label for="safety_vol">Safety Vol: <input type="text" class="form-control" style="width: 60px; display: inline;" onkeyup="changeSliderValue('short', 'safety_vol', $(this).val())" value="0.5" id="val_safety_vol"></label>
-                <input type="text" class="form-control slider" name="safety_vol" id="safety_vol" value="" data-slider-min="0" data-slider-max="10"
-                       data-slider-step="0.1" data-slider-value="1.51" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
+                <input type="text" class="form-control slider" name="safety_vol" id="safety_vol" value="" data-slider-min="0.1" data-slider-max="10"
+                       data-slider-step="0.01" data-slider-value="1.51" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
             </div>
 
             <div class="form-group col-md-4">
                 <label for="safety_step">Safety % Step: <input type="text" class="form-control" style="width: 60px; display: inline;" onkeyup="changeSliderValue('short', 'safety_step', $(this).val())" value="0.5" id="val_safety_step"></label>
-                <input type="text" class="form-control slider" name="safety_vol" id="safety_step" value="" data-slider-min="0" data-slider-max="10"
-                       data-slider-step="0.1" data-slider-value="1.51" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
+                <input type="text" class="form-control slider" name="safety_vol" id="safety_step" value="" data-slider-min="0.1" data-slider-max="10"
+                       data-slider-step="0.01" data-slider-value="1.51" data-slider-id="GC" data-slider-tooltip="hide" data-slider-handle="round" >
             </div>
 
             <div class="form-group col-md-4">

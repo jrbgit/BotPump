@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 class CalculatorController extends Controller
 {
     //
-    function spreadsheetByShortBot() {
-        return view('pages.calculator.shortbot.spreadsheet');
+    function shortBot() {
+        return view('pages.calculator.shortbot');
     }
 
-    function spreadsheetByLongBot() {
-        return view('pages.calculator.longbot.spreadsheet');
+    function longBot() {
+        return view('pages.calculator.longbot');
     }
 }

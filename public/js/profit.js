@@ -1,4 +1,5 @@
 $(function () {
+  /*
   $('#tbl_both,#tbl_long,#tbl_short').DataTable({
     'paging'      : true,
     'lengthChange': true,
@@ -7,6 +8,7 @@ $(function () {
     'info'        : true,
     'autoWidth'   : true
   })
+  */
 });
 function openTab(evt, tabName) {
   var i, x, tablinks;

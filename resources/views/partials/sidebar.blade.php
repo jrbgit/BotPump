@@ -56,27 +56,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="treeview {{ request()->is('calculator/longBot*') ? 'active menu-open' : '' }}">
-                        <a href="#"><i class="fa fa-circle-o"></i>Long Bot
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li class="{{ request()->is('calculator/longBot/spreadsheet*') ? 'active' : '' }}"><a href="{{ url('calculator/longBot/spreadsheet') }}"><i class="fa fa-circle-o"></i>Spreadsheet</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="treeview {{ request()->is('calculator/shortBot*') ? 'active menu-open' : '' }}">
-                        <a href="#"><i class="fa fa-circle-o"></i>Short Bot
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li class="{{ request()->is('calculator/shortBot/spreadsheet*') ? 'active' : '' }}"><a href="{{ url('calculator/shortBot/spreadsheet') }}"><i class="fa fa-circle-o"></i>Spreadsheet</a></li>
-                        </ul>
-                    </li>
+                    <li class="{{ request()->is('calculator/longBot*') ? 'active' : '' }}"><a href="{{ url('calculator/longBot') }}"><i class="fa fa-circle-o"></i>Long Bot</a></li>
+                    <li class="{{ request()->is('calculator/shortBot*') ? 'active' : '' }}"><a href="{{ url('calculator/shortBot') }}"><i class="fa fa-circle-o"></i>Short Bot</a></li>
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->
