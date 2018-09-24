@@ -2,8 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{{ $page_title or "3 Commas" }}</title>
+    <title>{{ $page_title or "BotPump" }}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link rel="icon" type="image/png" href="{{ asset('img/favicon-white.png') }}?v=2111">
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome/font-awesome.min.css') }}">
@@ -25,7 +26,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="/"><b>3 COMMAS</b></a>
+        <a style="text-align:center;" href="/"><img src="{{ asset('img/logo-white-trans.png') }}"></a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -50,11 +51,11 @@
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="checkbox icheck">
+                    <!--div class="checkbox icheck">
                         <label>
                             <input type="checkbox" name="remember"> Remember Me
                         </label>
-                    </div>
+                    </div-->
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
@@ -75,7 +76,7 @@
         <!-- /.social-auth-links -->
 
         <a href="{{ route('password.request') }}">I forgot my password</a><br>
-        <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
+        <a href="{{ route('register') }}" class="text-center">Create an account</a>
 
     </div>
     <!-- /.login-box-body -->

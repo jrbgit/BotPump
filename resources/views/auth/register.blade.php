@@ -2,8 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{{ $page_title or "3 Commas" }}</title>
+    <title>{{ $page_title or "BotPump" }}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link rel="icon" type="image/png" href="{{ asset('img/favicon-white.png') }}?v=2111">
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome/font-awesome.min.css') }}">
@@ -25,11 +26,11 @@
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <a href="/"><b>3 COMMAS</b></a>
+        <a style="text-align:center;" href="/"><img src="{{ asset('img/logo-white-trans.png') }}"></a>
     </div>
 
     <div class="register-box-body">
-        <p class="login-box-msg">Register a new membership</p>
+        <p class="login-box-msg">Create a new account</p>
 
         <form action="{{ route('register') }}" method="post">
             {{ csrf_field() }}
@@ -63,11 +64,11 @@
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="checkbox icheck">
+                    <!--div class="checkbox icheck">
                         <label>
                             <input type="checkbox"> I agree to the <a href="#">terms</a>
                         </label>
-                    </div>
+                    </div-->
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
@@ -85,7 +86,7 @@
                 Google+</a>
         </div-->
 
-        <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
+        <a href="{{ route('login') }}" class="text-center">I already have an account</a>
     </div>
     <!-- /.form-box -->
 </div>
