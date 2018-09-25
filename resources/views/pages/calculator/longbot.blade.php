@@ -132,8 +132,13 @@
     <script>
         $(function() {
             $('.slider').slider().on('slide', function (e) {
-                var value = $(this).data('slider').getValue();
-                $('#val_' + $(this).attr('id')).val(value);
+                var id = $(this).attr('id');
+                if (id != "safety_trade_count") {
+                    var value = $(this).data('slider').getValue().toFixed(2);
+                } else {
+                    var value = $(this).data('slider').getValue();
+                }
+                $('#val_' + id).val(value);
 
                 calculateLongSpreadsheet();
             });
