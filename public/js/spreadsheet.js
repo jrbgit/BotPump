@@ -68,13 +68,13 @@ function calculateShortSpreadsheet() {
             var BH1 = parseFloat($('#val_deviation').val());
             var BH2 = parseFloat($('#safety_trade').val());
             var BH3 = BH1;
-            var BH4 = parseFloat($('#base_order_1').val()) + BH2;
+            var BH4 = parseFloat($('#base_order_1').text()) + BH2;
             var BH5 = (BH4 * (parseFloat($('#val_target_profit').val()) / 100)) * parseFloat($('#btc_price').val());
             var BH8 = parseFloat($('#base_order_5').val()) * (100 + BH1) / 100;
             var BH7 = BH2 / BH8;
             var BH6 = BH7 + parseFloat($('#base_order_3').text());
 
-            var BH9_A = parseFloat($('#base_order_6').val() * $('#base_order_1').val());
+            var BH9_A = parseFloat($('#base_order_6').text() * $('#base_order_1').text());
             var BH9_B = parseFloat(BH8 * BH2);
             var BH9_C = parseFloat(BH9_A + BH9_B);
             var BH9 = parseFloat(BH9_C / BH4);
