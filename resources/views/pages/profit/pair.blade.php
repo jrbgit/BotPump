@@ -120,7 +120,7 @@
                                 }
                             },
                             title: {
-                                text: 'Chart for profit by both pair'
+                                text: 'Profit By Base Pair, Grouped By Quote'
                             },
                             yAxis: {
                                 title: {
@@ -129,7 +129,7 @@
                                 tickInterval: 0.0001
                             },
                             xAxis: {
-                                categories: ['Both bot pair']
+                                categories: ['Pair']
                             },
                             credits: {
                                 enabled: false
@@ -152,7 +152,7 @@
                                 }
                             },
                             title: {
-                                text: 'Chart for profit by long pair'
+                                text: 'Long Profit By Base Pair, Grouped By Quote'
                             },
                             yAxis: {
                                 title: {
@@ -161,7 +161,7 @@
                                 tickInterval: 0.0001
                             },
                             xAxis: {
-                                categories: ['Long bot pair']
+                                categories: ['Pair']
                             },
                             credits: {
                                 enabled: false
@@ -184,7 +184,7 @@
                                 }
                             },
                             title: {
-                                text: 'Chart for profit by short pair'
+                                text: 'Short Profit By Base Pair, Grouped By Quote'
                             },
                             yAxis: {
                                 title: {
@@ -193,7 +193,7 @@
                                 tickInterval: 0.0001
                             },
                             xAxis: {
-                                categories: ['Short bot pair']
+                                categories: ['Pair']
                             },
                             credits: {
                                 enabled: false

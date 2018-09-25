@@ -30,6 +30,22 @@ function calculateShortSpreadsheet() {
 
     var E3 = parseFloat($('#val_safety_step').val());
 
+    var newRow =
+            "<tr>" +
+            "<td>Base</td>" +
+            "<td>-</td>" +
+            "<td>-</td>" +
+            "<td>-</td>" +
+            "<td>-</td>" +
+            "<td>-</td>" +
+            "<td>-</td>" +
+            "<td>-</td>" +
+            "<td>-</td>" +
+            "<td>-</td>" +
+            "<td>-</td>" +
+            "</tr>";
+        $('#tbl_short tbody').append(newRow);
+
     for (var i = 0; i < safety_trade_count; i++) {
         if (i > 0) {
             var BH4OLD = BH4;
@@ -66,7 +82,7 @@ function calculateShortSpreadsheet() {
             var BH10 = (BH9 * (100 - (parseFloat($('#val_target_profit').val()) + 0.2))) / 100;
         }
 
-        var newRow =
+        newRow =
             "<tr>" +
             "<td>" + (i + 1) + "</td>" +
             "<td>" + BH1.toFixed(2) + "</td>" +
@@ -101,8 +117,23 @@ function calculateLongSpreadsheet() {
     var targetProfit = parseFloat($('#target_profit').val()) + 0.2;
     var sell_price = (buyPrice * (100 + targetProfit)) / 100;
     $('#sell_price').text(sell_price.toFixed(8));
-
     var safety_trade_count = $('#val_safety_trade_count').val();
+    var base_profit = parseFloat(($('#base_trade').val() * parseFloat($('#val_target_profit').val()) / 100) * parseFloat($('#btc_price').val()));
+    base_profit = base_profit.toFixed(2);
+
+    var newRow =
+            "<tr>" +
+            "<td>Base</td>" +
+            "<td>-</td>" +
+            "<td>-</td>" +
+            "<td>-</td>" +
+            "<td>" + $('#base_trade').val() + "</td>" +
+            "<td>$" + base_profit + "</td>" +
+            "<td>" + buyPrice + "</td>" +
+            "<td>-</td>" +
+            "<td>" + $('#sell_price').text() + "</td>" +
+            "</tr>";
+        $('#tbl_long tbody').append(newRow);
 
     for (var i = 0; i < safety_trade_count; i++) {
         if (i > 0) {
@@ -131,7 +162,7 @@ function calculateLongSpreadsheet() {
             var BH8 = parseFloat((BH7 * (100 + (parseFloat($('#val_target_profit').val()) + 0.2))) / 100);
         }
 
-        var newRow =
+        newRow =
             "<tr>" +
             "<td>" + (i + 1) + "</td>" +
             "<td>" + BH1.toFixed(2) + "</td>" +

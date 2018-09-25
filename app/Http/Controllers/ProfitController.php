@@ -13,10 +13,10 @@ class ProfitController extends Controller
         $user = Auth::user();
 
         $data = array(
-            'both' => array(),
-            'long' => array(),
-            'short' => array(),
-            'api_key' => 0
+            'both'      => array(),
+            'long'      => array(),
+            'short'     => array(),
+            'api_key'   => 0
         );
 
         if (sizeof($user->api_keys) > 0) {
@@ -35,10 +35,10 @@ class ProfitController extends Controller
         $user = Auth::user();
 
         $data = array(
-            'both' => array(),
-            'long' => array(),
-            'short' => array(),
-            'api_key' => 0
+            'both'      => array(),
+            'long'      => array(),
+            'short'     => array(),
+            'api_key'   => 0
         );
 
         if (sizeof($user->api_keys) > 0) {

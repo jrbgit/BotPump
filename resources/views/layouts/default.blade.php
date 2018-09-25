@@ -2,8 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{{ $page_title or "3 Commas" }}</title>
+    <title>{{ $page_title or "BotPump" }}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link rel="icon" type="image/png" href="{{ asset('img/favicon-white.png') }}?v=2111">
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome/font-awesome.min.css') }}">
@@ -52,14 +53,7 @@
                    <!--h1>
                         {{ ucwords($segments[0]) }}
                         <small></small>
-                    </h1-->
-
-
-                    <!-- You can dynamically generate breadcrumbs here -->
-                    <!--ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                        <li class="active">Here</li>
-                    </ol-->
+                    </h1>
                     <ol class="breadcrumb">
                         @for($i = 0; $i < sizeof($segments); $i++)
                             @if($i == 0)
@@ -70,7 +64,7 @@
                                 <li>{{ ucwords($segments[$i]) }}</li>
                             @endif
                         @endfor
-                    </ol>
+                    </ol-->
                 </section>
 
                 <!-- Main content -->
@@ -105,7 +99,7 @@
     @yield('script')
 
     @if (session()->has('load_deal'))
-        <!--script>
+        <script>
             $.get('{{ route('3commas/loadDeal') }}', function (response) {
                 console.log(response);
                 alert('data load succeed');
@@ -115,7 +109,7 @@
                 console.log(response);
                 alert('data load succeed');
             });
-        </script-->
+        </script>
     @endif
 
 </body>

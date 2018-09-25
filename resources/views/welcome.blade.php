@@ -4,8 +4,9 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="{{ asset('img/favicon-white.png') }}?v=2111">
 
-        <title>Laravel</title>
+        <title>BotPump</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -79,15 +80,13 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    <a style="text-align:center;" href="/"><img src="{{ asset('img/logo-white-trans.png') }}"></a>
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="#">Help</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Betas</a>
                 </div>
             </div>
         </div>

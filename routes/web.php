@@ -34,4 +34,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/calculator/longBot', 'CalculatorController@longBot');
     Route::get('/calculator/shortBot', 'CalculatorController@shortBot');
+
+    Route::get('/plan', 'PlanController@index');
 });
