@@ -17,6 +17,18 @@
                         <input type="text" class="form-control" id="name" name="name" placeholder="Enter API Name" required autofocus>
                     </div>
 
+                    <div class="form-group {{ $errors->has('api_type') ? 'has-error' : '' }}">
+                        <label for="api_key">API Type</label>
+                        <select type="text" class="form-control" id="api_type" name="api_type" placeholder="Select API Type" required>
+                            <option value="" disabled selected hidden>API Site</option>
+                            <option value="3commas.io>">3commas.io</option>
+                            <option value="Binance" disabled>Binance.com</option>
+                        </select>
+                        @if ($errors->has('api_type'))
+                            <div style="color: red;">{{ $errors->first('api_type') }}</div>
+                        @endif
+                    </div>
+
                     <div class="form-group {{ $errors->has('api_key') ? 'has-error' : '' }}">
                         <label for="api_key">API Key</label>
                         <input type="text" class="form-control" id="api_key" name="api_key" placeholder="Enter API Key" required>

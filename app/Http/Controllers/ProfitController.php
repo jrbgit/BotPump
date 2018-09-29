@@ -60,17 +60,31 @@ class ProfitController extends Controller
 
         if ($strategy == "%") {
             $sql = "SELECT
-                       pair, SUM(final_profit) total_profit, count(*) total_deals
+                       pair, SUM(final_profit) total_profit,
+                       SUM(CASE WHEN deals.status in ('completed', 'panic_sold')
+                       THEN 1
+                       ELSE 0
+                       END
+                       ) as total_deals
                 FROM deals
                 WHERE pair LIKE '{$base}_%' AND deals.api_key_id={$api_key}
+                AND deals.status IN ('completed', 'stop_loss_finished' 'panic_sold', 'switched')
+                AND `finished?` = 1
                 GROUP BY pair
                 ORDER BY total_profit DESC;";
         } else {
             $sql = "SELECT
-                       pair, SUM(final_profit) total_profit, count(*) total_deals
+                       pair, SUM(final_profit) total_profit,
+                       SUM(CASE WHEN deals.status in ('completed', 'panic_sold')
+                       THEN 1
+                       ELSE 0
+                       END
+                       ) as total_deals
                 FROM deals
                 LEFT JOIN bots ON bots.id=deals.bot_id
                 WHERE pair LIKE '{$base}_%' AND bots.strategy LIKE '{$strategy}' AND deals.api_key_id={$api_key}
+                AND deals.status IN ('completed', 'stop_loss_finished' 'panic_sold', 'switched')
+                AND `finished?` = 1
                 GROUP BY pair
                 ORDER BY total_profit DESC;";
         }
@@ -86,10 +100,17 @@ class ProfitController extends Controller
         $api_key = $request->input('api_key');
 
         $sql = "SELECT
-                  bots.id, bots.name, bots.strategy, SUM(deals.final_profit) total_profit, COUNT(*) total_deals
+                  bots.id, bots.name, bots.strategy, SUM(deals.final_profit) total_profit,
+                       SUM(CASE WHEN deals.status in ('completed', 'panic_sold')
+                       THEN 1
+                       ELSE 0
+                       END
+                       ) as total_deals
                 FROM bots
                 LEFT JOIN deals on bots.id = deals.bot_id
                 WHERE deals.pair LIKE '{$base}_%' AND bots.strategy LIKE '{$strategy}' AND bots.api_key_id={$api_key}
+                AND deals.status IN ('completed', 'stop_loss_finished', 'panic_sold', 'switched')
+                AND `finished?` = 1
                 GROUP BY bots.id
                 ORDER BY total_profit DESC;";
 
@@ -101,32 +122,32 @@ class ProfitController extends Controller
     function buildBaseQuery($api_key, $strategy, $type = "pair") {
         if ($type == "pair") {
             if ($strategy == "both") {
-                $sql = "SELECT 
-                      SUBSTRING_INDEX(pair, '_', 1) AS base 
+                $sql = "SELECT
+                      SUBSTRING_INDEX(pair, '_', 1) AS base
                       FROM deals
                       WHERE deals.api_key_id=$api_key AND deals.pair IS NOT NULL
                       GROUP BY base";
             } else {
-                $sql = "SELECT 
-                      SUBSTRING_INDEX(pair, '_', 1) AS base 
-                      FROM deals 
-                      LEFT JOIN bots ON bots.id = deals.bot_id 
+                $sql = "SELECT
+                      SUBSTRING_INDEX(pair, '_', 1) AS base
+                      FROM deals
+                      LEFT JOIN bots ON bots.id = deals.bot_id
                       WHERE bots.strategy LIKE '$strategy' AND deals.api_key_id=$api_key AND deals.pair IS NOT NULL
                       GROUP BY base";
             }
         } else {
             if ($strategy == "both") {
-                $sql = "SELECT 
-                      SUBSTRING_INDEX(pair, '_', 1) AS base 
-                      FROM deals 
-                      LEFT JOIN bots ON bots.id = deals.bot_id 
+                $sql = "SELECT
+                      SUBSTRING_INDEX(pair, '_', 1) AS base
+                      FROM deals
+                      LEFT JOIN bots ON bots.id = deals.bot_id
                       WHERE deals.api_key_id=$api_key AND deals.pair IS NOT NULL AND bots.id IS NOT NULL
                       GROUP BY base";
             } else {
-                $sql = "SELECT 
-                      SUBSTRING_INDEX(pair, '_', 1) AS base 
-                      FROM deals 
-                      LEFT JOIN bots ON bots.id = deals.bot_id 
+                $sql = "SELECT
+                      SUBSTRING_INDEX(pair, '_', 1) AS base
+                      FROM deals
+                      LEFT JOIN bots ON bots.id = deals.bot_id
                       WHERE bots.strategy LIKE '$strategy' AND deals.api_key_id=$api_key AND deals.pair IS NOT NULL AND bots.id IS NOT NULL
                       GROUP BY base";
             }
