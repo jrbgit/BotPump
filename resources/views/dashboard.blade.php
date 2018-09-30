@@ -7,7 +7,7 @@
       <div class="info-box">
         <span class="info-box-icon bg-green"><i class="fa fa-database"></i></span>
         <div class="info-box-content">
-          <span class="info-box-text">Completed<br>Deals</span>
+          <span class="info-box-text">Total<br>Deals</span>
           <span class="info-box-number">{{ number_format($completed_deals) }}</span>
         </div>
       </div>
@@ -26,8 +26,8 @@
       <div class="info-box">
         <span class="info-box-icon bg-red"><i class="fa fa-database"></i></span>
         <div class="info-box-content">
-          <span class="info-box-text">Completed<br>Deals</span>
-          <span class="info-box-number">Unknown</span>
+          <span class="info-box-text">Total<br>Deals</span>
+          <span class="info-box-number">?</span>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
         <span class="info-box-icon bg-red"><i class="fa fa-bolt"></i></span>
         <div class="info-box-content">
           <span class="info-box-text">Active<br>Deals</span>
-          <span class="info-box-number">Unknown</span>
+          <span class="info-box-number">?</span>
         </div>
       </div>
     </div>
@@ -57,7 +57,7 @@
         <span class="info-box-icon bg-red"><i class="fa fa-key"></i></span>
         <div class="info-box-content">
           <span class="info-box-text">API<br>Key</span>
-          <span class="info-box-number">None</span>
+          <span class="info-box-number">?</span>
         </div>
       </div>
     </div>
@@ -100,7 +100,11 @@
                 @else
                 <tr>
                   @endif
-                <td><span class="badge bg-blue">{{ $total->base }}</span></td>
+                <td>
+                  @if ($total->base != '')
+                    <img src="{{ asset('img/coins/' . strtolower($total->base) . '.png') }}" height="22px"> <span class="label bg-gray">{{ $total->base }}</span>
+                  @endif
+                </td>
                 <td><span style="font-weight: bold;">{{ $total->profit }}</span></td>
                 <td>{{ $total->unique }}</td>
                 <td>{{ $total->completed }}</td>
@@ -112,6 +116,10 @@
                 <td style="background-color: #3c8dbc30; font-weight: bold;">{{ $total->actual }}</td>
               </tr>
             @endforeach
+          @else
+          <tr>
+            <td colspan="47">No Data Available</td>
+          </tr>
           @endif
         </tbody></table>
       </div>

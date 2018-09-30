@@ -38,5 +38,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/plan', 'PlanController@index');
 
     Route::get('/profile', 'ProfileController@index');
+    Route::post('/profile', 'UserController@update_avatar');
 });
 
