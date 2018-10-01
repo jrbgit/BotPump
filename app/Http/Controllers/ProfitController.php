@@ -24,8 +24,8 @@ class ProfitController extends Controller
 
             $data['api_key'] = $api_key;
             $data['both'] = DB::select($this->buildBaseQuery($api_key, "both"));
-            $data['long'] = DB::select($this->buildBaseQuery($api_key, "long"));
-            $data['short'] = DB::select($this->buildBaseQuery($api_key, "short"));
+            $data['long'] = DB::select($this->buildBaseQuery($api_key, "Deal"));
+            $data['short'] = DB::select($this->buildBaseQuery($api_key, "Deal::ShortDeal"));
         }
 
         return view('pages.profit.pair',$data);
@@ -46,8 +46,8 @@ class ProfitController extends Controller
 
             $data['api_key'] = $api_key;
             $data['both'] = DB::select($this->buildBaseQuery($api_key, "both", "bot"));
-            $data['long'] = DB::select($this->buildBaseQuery($api_key, "long", "bot"));
-            $data['short'] = DB::select($this->buildBaseQuery($api_key, "short", "bot"));
+            $data['long'] = DB::select($this->buildBaseQuery($api_key, "Deal", "bot"));
+            $data['short'] = DB::select($this->buildBaseQuery($api_key, "Deal::ShortDeal", "bot"));
         }
 
         return view('pages.profit.bot', $data);
@@ -75,15 +75,14 @@ class ProfitController extends Controller
         } else {
             $sql = "SELECT
                        pair, SUM(final_profit) total_profit,
-                       SUM(CASE WHEN deals.status in ('completed', 'panic_sold')
+                       SUM(CASE WHEN status in ('completed', 'panic_sold')
                        THEN 1
                        ELSE 0
                        END
                        ) as total_deals
                 FROM deals
-                LEFT JOIN bots ON bots.id=deals.bot_id
-                WHERE pair LIKE '{$base}_%' AND bots.strategy LIKE '{$strategy}' AND deals.api_key_id={$api_key}
-                AND deals.status IN ('completed', 'stop_loss_finished' 'panic_sold', 'switched')
+                WHERE pair LIKE '{$base}_%' AND type LIKE '{$strategy}' AND api_key_id={$api_key}
+                AND status IN ('completed', 'stop_loss_finished' 'panic_sold', 'switched')
                 AND `finished?` = 1
                 GROUP BY pair
                 ORDER BY total_profit DESC;";
@@ -100,18 +99,22 @@ class ProfitController extends Controller
         $api_key = $request->input('api_key');
 
         $sql = "SELECT
-                  bots.id, bots.name, bots.strategy, SUM(deals.final_profit) total_profit,
-                       SUM(CASE WHEN deals.status in ('completed', 'panic_sold')
-                       THEN 1
-                       ELSE 0
-                       END
-                       ) as total_deals
-                FROM bots
-                LEFT JOIN deals on bots.id = deals.bot_id
-                WHERE deals.pair LIKE '{$base}_%' AND bots.strategy LIKE '{$strategy}' AND bots.api_key_id={$api_key}
+                 deals.bot_id,
+                      CASE WHEN deals.type = 'Deal' THEN 'long'
+                        WHEN deals.type = 'Deal::ShortDeal' THEN 'short'
+                      END as strategy,
+                      COALESCE(bots.name, concat('Deleted Bot ID: ', deals.bot_id)) As name, SUM(deals.final_profit) total_profit,
+                      SUM(CASE WHEN deals.status in ('completed', 'panic_sold')
+                      THEN 1
+                      ELSE 0
+                      END
+                      ) as total_deals
+                FROM deals
+                LEFT OUTER JOIN bots on deals.bot_id = bots.id
+                WHERE deals.pair LIKE '{$base}_%' AND deals.type LIKE '{$strategy}' AND deals.api_key_id={$api_key}
                 AND deals.status IN ('completed', 'stop_loss_finished', 'panic_sold', 'switched')
-                AND `finished?` = 1
-                GROUP BY bots.id
+                AND deals.`finished?` = 1
+                GROUP BY deals.bot_id, deals.type
                 ORDER BY total_profit DESC;";
 
         $profit = DB::select($sql);
@@ -131,8 +134,7 @@ class ProfitController extends Controller
                 $sql = "SELECT
                       SUBSTRING_INDEX(pair, '_', 1) AS base
                       FROM deals
-                      LEFT JOIN bots ON bots.id = deals.bot_id
-                      WHERE bots.strategy LIKE '$strategy' AND deals.api_key_id=$api_key AND deals.pair IS NOT NULL
+                      WHERE deals.type LIKE '$strategy' AND deals.api_key_id=$api_key AND deals.pair IS NOT NULL
                       GROUP BY base";
             }
         } else {
@@ -140,15 +142,13 @@ class ProfitController extends Controller
                 $sql = "SELECT
                       SUBSTRING_INDEX(pair, '_', 1) AS base
                       FROM deals
-                      LEFT JOIN bots ON bots.id = deals.bot_id
-                      WHERE deals.api_key_id=$api_key AND deals.pair IS NOT NULL AND bots.id IS NOT NULL
+                      WHERE deals.api_key_id=$api_key AND deals.pair IS NOT NULL
                       GROUP BY base";
             } else {
                 $sql = "SELECT
                       SUBSTRING_INDEX(pair, '_', 1) AS base
                       FROM deals
-                      LEFT JOIN bots ON bots.id = deals.bot_id
-                      WHERE bots.strategy LIKE '$strategy' AND deals.api_key_id=$api_key AND deals.pair IS NOT NULL AND bots.id IS NOT NULL
+                      WHERE deals.type LIKE '$strategy' AND deals.api_key_id=$api_key AND deals.pair IS NOT NULL
                       GROUP BY base";
             }
         }

@@ -92,10 +92,17 @@
             $('.select2').select2().on('change', function () {
                 var base = $(this).val();
                 var strategy = $(this).attr('id').split("_")[1];
+                if (strategy == "long") {
+                    var dealType = "Deal";
+                } else if (strategy == "short") {
+                    var dealType = "Deal::ShortDeal";
+                } else {
+                    var dealType = "%";
+                }
                 $.post("{{ route('profit/getPairByBase') }}", {
                     "_token" : "{{ csrf_token() }}",
                     "base" : base,
-                    "strategy" : strategy == "both" ? "%" : strategy,
+                    "strategy" : dealType,
                     "api_key" : "{{ $api_key }}"
                 }, function (response) {
                     var series = [];

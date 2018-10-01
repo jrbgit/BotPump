@@ -53,3 +53,20 @@ tfoot {
 .content {
     padding-top: 15px;
 }
+
+.bg-green {
+    background-color: #8aa4af!important;
+}
+
+.bg-red {
+    background-color: #bc493c!important;
+}
+
+.info-box-text {
+    color: #3c8dbc;
+    font-weight: bold;
+}
+
+.info-box-number {
+    color: #243f4c;
+}
