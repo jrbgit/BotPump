@@ -9,6 +9,28 @@ use Illuminate\Http\Request;
 class ProfitController extends Controller
 {
     //
+    function date() {
+        $user = Auth::user();
+
+        $data = array(
+            'both'      => array(),
+            'long'      => array(),
+            'short'     => array(),
+            'api_key'   => 0
+        );
+
+        if (sizeof($user->api_keys) > 0) {
+            $api_key = $user->api_keys[0]->id;
+
+            $data['api_key'] = $api_key;
+            $data['both'] = DB::select($this->buildBaseQuery($api_key, "both"));
+            $data['long'] = DB::select($this->buildBaseQuery($api_key, "Deal"));
+            $data['short'] = DB::select($this->buildBaseQuery($api_key, "Deal::ShortDeal"));
+        }
+
+        return view('pages.profit.date',$data);
+    }
+
     function pair() {
         $user = Auth::user();
 
