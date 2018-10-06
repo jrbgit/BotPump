@@ -24,6 +24,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/apikey/create', 'ApiKeyController@create');
     Route::post('/apikey/store', 'ApiKeyController@store')->name('apikey/store');
 
+    Route::get('/exchangekey', 'ExchangeKeyController@index');
+    Route::get('/exchangekey/create', 'ExchangeKeyController@create');
+    Route::post('/exchangekey/store', 'ExchangeKeyController@store')->name('exchangekey/store');
+
     Route::get('/3commas/loadDeal', 'ThreeCommasController@loadDealFrom3Commas')->name('3commas/loadDeal');
     Route::get('/3commas/loadBots', 'ThreeCommasController@loadBotsFrom3Commas')->name('3commas/loadBots');
 
