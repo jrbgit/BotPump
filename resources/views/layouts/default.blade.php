@@ -16,6 +16,8 @@
 
     <link rel="stylesheet" href="{{ asset('css/select2/select2.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-daterangepicker/daterangepicker.css') }}">
+
     <link rel="stylesheet" href="{{ asset('css/highcharts/highcharts.css') }}">
 
     <!-- Theme style -->
@@ -25,6 +27,8 @@
     <link rel="stylesheet" href="{{ asset('css/w3.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/loading.css') }}">
 
     @yield('stylesheet')
 
@@ -86,6 +90,9 @@
     <script src="{{ asset('js/datatables.net/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/datatables.net-bs/dataTables.bootstrap.min.js') }}"></script>
 
+    <script src="{{ asset('js/moment/moment.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+
     <script src="{{ asset('js/highcharts/highcharts.js') }}"></script>
 
     <script src="{{ asset('js/select2/select2.min.js') }}"></script>
@@ -96,18 +103,27 @@
 
     <script src="{{ asset('js/bootstrap-slider/bootstrap-slider.js') }}"></script>
 
+    <script src="{{ asset('js/loading.js') }}"></script>
+
     @yield('script')
 
     @if (session()->has('load_deal'))
         <script>
+            waitingDialog.show('Please wait while downloading');
+
+            var dealLoaded = false, botLoaded = false;
             $.get('{{ route('3commas/loadDeal') }}', function (response) {
                 console.log(response);
-                alert('data load succeed');
+                dealLoaded = true;
+                if (dealLoaded && botLoaded)
+                    waitingDialog.hide();
             });
 
             $.get('{{ route('3commas/loadBots') }}', function (response) {
                 console.log(response);
-                alert('data load succeed');
+                botLoaded = true;
+                if (dealLoaded && botLoaded)
+                    waitingDialog.hide();
             });
         </script>
     @endif

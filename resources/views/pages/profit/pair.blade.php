@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-    <div class="w3-container">
+    <div class="box box-primary" style="padding: 0.01em 16px;">
         <h2>Profit By Pair</h2>
 
         <div class="w3-row">

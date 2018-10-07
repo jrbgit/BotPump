@@ -20,7 +20,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class=""><a href="#"><i class="fa fa-calendar"></i> Profit by Date</a></li>
+                    <li class="{{ request()->is('profit/date*') ? 'active' : '' }}"><a href="{{ url('profit/date') }}"><i class="fa fa-calendar"></i> Profit by Date</a></li>
                     <li class="{{ request()->is('profit/pair*') ? 'active' : '' }}"><a href="{{ url('profit/pair') }}"><i class="fa fa-clone"></i> Profit by Pair</a></li>
                     <li class="{{ request()->is('profit/bot*') ? 'active' : '' }}"><a href="{{ url('profit/bot') }}"><i class="fa fa-server"></i> Profit by Bot</a></li>
                 </ul>

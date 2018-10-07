@@ -31,10 +31,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/3commas/loadDeal', 'ThreeCommasController@loadDealFrom3Commas')->name('3commas/loadDeal');
     Route::get('/3commas/loadBots', 'ThreeCommasController@loadBotsFrom3Commas')->name('3commas/loadBots');
 
+    Route::get('/profit/date', 'ProfitController@date');
     Route::get('/profit/pair', 'ProfitController@pair');
     Route::get('/profit/bot', 'ProfitController@bot');
     Route::post('/profit/getPairByBase', 'ProfitController@getPairByBase')->name('profit/getPairByBase');
     Route::post('/profit/getBotByBase', 'ProfitController@getBotByBase')->name('profit/getBotByBase');
+    Route::post('/profit/getProfitByDate', 'ProfitController@getProfitByDate')->name('profit/getProfitByDate');
+    Route::post('/profit/getBasePair', 'ProfitController@getBasePair')->name('profit/getBasePair');
 
     Route::get('/calculator/longBot', 'CalculatorController@longBot');
     Route::get('/calculator/shortBot', 'CalculatorController@shortBot');
