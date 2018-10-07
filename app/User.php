@@ -34,4 +34,8 @@ class User extends Authenticatable
     public function api_keys() {
         return $this->hasMany('App\ApiKey');
     }
+
+    public function exchange_keys() {
+        return $this->hasMany('App\ExchangeKey');
+    }
 }

@@ -5,11 +5,11 @@
         <!-- general form elements -->
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Bot Service API</h3>
+                <h3 class="box-title">Exchange Service API</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" action="{{ route('apikey/store') }}" method="post">
+            <form role="form" action="{{ route('exchangekey/store') }}" method="post">
                 {{ csrf_field() }}
                 <div class="box-body">
                     <div class="form-group">
@@ -21,7 +21,7 @@
                         <label for="api_key">API Type</label>
                         <select type="text" class="form-control" id="api_type" name="api_type" placeholder="Select API Type" required>
                             <option value="" disabled selected hidden>API Site</option>
-                            <option value="3commas.io>">3commas.io</option>
+                            <option value="Binance">Binance.com</option>
                         </select>
                         @if ($errors->has('api_type'))
                             <div style="color: red;">{{ $errors->first('api_type') }}</div>
