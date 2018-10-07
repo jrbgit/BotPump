@@ -132,7 +132,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <div class="input-group">
-                        <button type="button" class="btn btn-default form-control pull-right daterange" id="daterange-short">
+                        <button type="button" class="btn btn-default form-control pull-right daterange" id="daterange_short">
                     <span>
                       <i class="fa fa-calendar"></i> Please select date range
                     </span>
@@ -203,7 +203,7 @@
             endDate  : moment()
         };
 
-        var rangeStart, rangeEnd, interval = "daily", pairs;
+        var rangeStartBoth, rangeEndBoth, rangeStartLong, rangeEndLong, rangeStartShort, rangeEndShort, intervalBoth = intervalLong = intervalShort = "daily", pairsBoth = pairsLong = pairsShort = [];
 
         function rowNum(data, type, row, meta) {
             return meta.row + 1;
@@ -211,6 +211,26 @@
 
         function makeReport(dealType) {
             $('.overlay').show();
+
+            if (dealType == "%") {
+                interval = intervalBoth;
+                pairs = pairsBoth;
+                rangeStart = rangeStartBoth;
+                rangeEnd = rangeEndBoth;
+            } else if (dealType == "Deal") {
+                interval = intervalLong;
+                pairs = pairsLong;
+                rangeStart = rangeStartLong;
+                rangeEnd = rangeEndLong;
+            } else if (dealType == "Deal::ShortDeal") {
+                interval = intervalShort;
+                pairs = pairsShort;
+                rangeStart = rangeStartShort;
+                rangeEnd = rangeEndShort;
+            }
+
+            if (pairs.length == 0)
+                return;
 
             $.post("{{ route('profit/getProfitByDate') }}", {
                 "_token" : "{{ csrf_token() }}",
@@ -330,48 +350,50 @@
             $('#daterange_both').daterangepicker(rangePickerOptions, function (start, end) {
                 $('#daterange_both span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 
-                rangeStart = start; rangeEnd = end;
+                rangeStartBoth = start; rangeEndBoth = end;
                 makeReport("%");
             });
 
             $('#daterange_long').daterangepicker(rangePickerOptions, function (start, end) {
                 $('#daterange_long span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 
-                rangeStart = start; rangeEnd = end;
+                rangeStartLong = start; rangeEndLong = end;
                 makeReport("Deal");
             });
 
             $('#daterange_short').daterangepicker(rangePickerOptions, function (start, end) {
                 $('#daterange_short span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 
-                rangeStart = start; rangeEnd = end;
+                rangeStartShort = start; rangeEndShort = end;
                 makeReport("Deal::ShortDeal");
             });
 
             $('.interval').on('change', function () {
-                interval = $(this).attr('id').split("_")[1];
                 strategy = $(this).attr('id').split("_")[2];
 
                 if (strategy == "long") {
+                    intervalLong = $(this).attr('id').split("_")[1];
                     makeReport("Deal");
                 } else if (strategy == "short") {
+                    intervalShort = $(this).attr('id').split("_")[1];
                     makeReport("Deal::ShortDeal");
                 } else {
+                    intervalBoth = $(this).attr('id').split("_")[1];
                     makeReport("%");
                 }
             });
 
             $('.pair').select2().on('change', function () {
-                pairs = $(this).val();
                 strategy = $(this).attr('id').split("_")[1];
-                if (pairs.length > 0) {
-                    if (strategy == "long") {
-                        makeReport("Deal");
-                    } else if (strategy == "short") {
-                        makeReport("Deal::ShortDeal");
-                    } else {
-                        makeReport("%");
-                    }
+                if (strategy == "long") {
+                    pairsLong = $(this).val();
+                    makeReport("Deal");
+                } else if (strategy == "short") {
+                    pairsShort = $(this).val();
+                    makeReport("Deal::ShortDeal");
+                } else {
+                    pairsBoth = $(this).val();
+                    makeReport("%");
                 }
             });
 
