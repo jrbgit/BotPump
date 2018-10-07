@@ -20,7 +20,7 @@
             <div class="form-group">
                 <div class="form-group col-md-2">
                     <label>Base</label>
-                    <select id="base_both" class="select2" style="width: 150px;">
+                    <select id="base_both" class="select2 base" style="width: 150px;">
                         @foreach($both as $item)
                             <option value="{{ $item->base }}">{{ $item->base }}</option>
                         @endforeach
@@ -28,11 +28,11 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label>Pairs</label>
-                    <select id="pair_both" class="select2" multiple="multiple" style="width: 300px;"></select>
+                    <select id="pair_both" class="select2 pair" multiple="multiple" style="width: 300px;"></select>
                 </div>
                 <div class="form-group col-md-3">
                     <div class="input-group">
-                        <button type="button" class="btn btn-default form-control pull-right" id="daterange-btn">
+                        <button type="button" class="btn btn-default form-control pull-right daterange" id="daterange_both">
                     <span>
                       <i class="fa fa-calendar"></i> Please select date range
                     </span>
@@ -44,16 +44,16 @@
                     <!-- $().button('toggle'), $().button('dispose') -->
                     <div class="btn-group btn-group-toggle form-group" data-toggle="buttons">
                         <label class="btn btn-default active" style="border-radius: 0px;">
-                            <input type="radio" class="interval_both" name="interval_both" id="interval_daily_both" autocomplete="off" checked> Daily
+                            <input type="radio" class="interval" name="interval_both" id="interval_daily_both" autocomplete="off" checked> Daily
                         </label>
                         <label class="btn btn-default" style="border-radius: 0px;">
-                            <input type="radio" class="interval_both" name="interval_both" id="interval_weekly_both" autocomplete="off"> Weekly
+                            <input type="radio" class="interval" name="interval_both" id="interval_weekly_both" autocomplete="off"> Weekly
                         </label>
                         <label class="btn btn-default" style="border-radius: 0px;">
-                            <input type="radio" class="interval_both" name="interval_both" id="interval_monthly_both" autocomplete="off"> Monthly
+                            <input type="radio" class="interval" name="interval_both" id="interval_monthly_both" autocomplete="off"> Monthly
                         </label>
                         <label class="btn btn-default" style="border-radius: 0px;">
-                            <input type="radio" class="interval_both" name="interval_both" id="interval_yearly_both" autocomplete="off"> Yearly
+                            <input type="radio" class="interval" name="interval_both" id="interval_yearly_both" autocomplete="off"> Yearly
                         </label>
                     </div>
                 </div>
@@ -67,30 +67,100 @@
         </div>
 
         <div id="long" class="tab" style="display:none">
-            <div class="form-group" style="margin-top: 15px;">
-                <label>Base</label>
-                <select id="base_long" class="select2" style="width: 300px;">
-                    @foreach($long as $item)
-                        <option value="{{ $item->base }}">{{ $item->base }}</option>
-                    @endforeach
-                </select>
+            <div class="form-group">
+                <div class="form-group col-md-2">
+                    <label>Base</label>
+                    <select id="base_long" class="select2 base" style="width: 150px;">
+                        @foreach($long as $item)
+                            <option value="{{ $item->base }}">{{ $item->base }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Pairs</label>
+                    <select id="pair_long" class="select2 pair" multiple="multiple" style="width: 300px;"></select>
+                </div>
+                <div class="form-group col-md-3">
+                    <div class="input-group">
+                        <button type="button" class="btn btn-default form-control pull-right daterange" id="daterange_long">
+                    <span>
+                      <i class="fa fa-calendar"></i> Please select date range
+                    </span>
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <!-- $().button('toggle'), $().button('dispose') -->
+                    <div class="btn-group btn-group-toggle form-group" data-toggle="buttons">
+                        <label class="btn btn-default active" style="border-radius: 0px;">
+                            <input type="radio" class="interval" name="interval_long" id="interval_daily_long" autocomplete="off" checked> Daily
+                        </label>
+                        <label class="btn btn-default" style="border-radius: 0px;">
+                            <input type="radio" class="interval" name="interval_long" id="interval_weekly_long" autocomplete="off"> Weekly
+                        </label>
+                        <label class="btn btn-default" style="border-radius: 0px;">
+                            <input type="radio" class="interval" name="interval_long" id="interval_monthly_long" autocomplete="off"> Monthly
+                        </label>
+                        <label class="btn btn-default" style="border-radius: 0px;">
+                            <input type="radio" class="interval" name="interval_long" id="interval_yearly_long" autocomplete="off"> Yearly
+                        </label>
+                    </div>
+                </div>
             </div>
-            <div id="chart_long" style="height: 400px; margin: 0 auto"></div>
+
+            <div id="chart_long" style="min-height: 400px; margin: 0 auto"></div>
+
             <div>
                 <table id ="tbl_long" class="table table-bordered table-striped table-hover-blue"></table>
             </div>
         </div>
 
         <div id="short" class="tab" style="display:none">
-            <div class="form-group" style="margin-top: 15px;">
-                <label>Base</label>
-                <select id="base_short" class="select2" style="width: 300px;">
-                    @foreach($short as $item)
-                        <option value="{{ $item->base }}">{{ $item->base }}</option>
-                    @endforeach
-                </select>
+            <div class="form-group">
+                <div class="form-group col-md-2">
+                    <label>Base</label>
+                    <select id="base_short" class="select2 base" style="width: 150px;">
+                        @foreach($short as $item)
+                            <option value="{{ $item->base }}">{{ $item->base }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Pairs</label>
+                    <select id="pair_short" class="select2 pair" multiple="multiple" style="width: 300px;"></select>
+                </div>
+                <div class="form-group col-md-3">
+                    <div class="input-group">
+                        <button type="button" class="btn btn-default form-control pull-right daterange" id="daterange-short">
+                    <span>
+                      <i class="fa fa-calendar"></i> Please select date range
+                    </span>
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <!-- $().button('toggle'), $().button('dispose') -->
+                    <div class="btn-group btn-group-toggle form-group" data-toggle="buttons">
+                        <label class="btn btn-default active" style="border-radius: 0px;">
+                            <input type="radio" class="interval" name="interval_short" id="interval_daily_short" autocomplete="off" checked> Daily
+                        </label>
+                        <label class="btn btn-default" style="border-radius: 0px;">
+                            <input type="radio" class="interval" name="interval_short" id="interval_weekly_short" autocomplete="off"> Weekly
+                        </label>
+                        <label class="btn btn-default" style="border-radius: 0px;">
+                            <input type="radio" class="interval" name="interval_short" id="interval_monthly_short" autocomplete="off"> Monthly
+                        </label>
+                        <label class="btn btn-default" style="border-radius: 0px;">
+                            <input type="radio" class="interval" name="interval_short" id="interval_yearly_short" autocomplete="off"> Yearly
+                        </label>
+                    </div>
+                </div>
             </div>
-            <div id="chart_short" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+            <div id="chart_short" style="min-height: 400px; margin: 0 auto"></div>
+
             <div>
                 <table id ="tbl_short" class="table table-bordered table-striped table-hover-blue"></table>
             </div>
@@ -119,6 +189,19 @@
                 "render": rowNum
             } ]
         };
+        var rangePickerOptions = {
+            opens: "right",
+            ranges   : {
+                'Today'       : [moment(), moment()],
+                'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+                'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            startDate: moment().subtract(29, 'days'),
+            endDate  : moment()
+        };
 
         var rangeStart, rangeEnd, interval = "daily", pairs;
 
@@ -126,13 +209,13 @@
             return meta.row + 1;
         }
 
-        function makeReport() {
+        function makeReport(dealType) {
             $('.overlay').show();
 
             $.post("{{ route('profit/getProfitByDate') }}", {
                 "_token" : "{{ csrf_token() }}",
                 "pair" : pairs,
-                "strategy" : "%",
+                "strategy" : dealType,
                 "start" : rangeStart != null ? rangeStart.format('YYYY-MM-DD 00:00:00') : "",
                 "end" : rangeEnd != null ?  rangeEnd.format('YYYY-MM-DD 23:59:59') : "",
                 "interval" : interval,
@@ -164,11 +247,27 @@
                 console.log(categories);
                 console.log(series);
 
-                $tableBoth.clear();
-                $tableBoth.rows.add(response);
-                $tableBoth.draw();
+                var chartId = "chart_both";
+                if (dealType == "%") {
+                    $tableBoth.clear();
+                    $tableBoth.rows.add(response);
+                    $tableBoth.draw();
+                } else if (dealType == "Deal::ShortDeal") {
+                    $tableShort.clear();
+                    $tableShort.rows.add(response);
+                    $tableShort.draw();
 
-                Highcharts.chart('chart_both', {
+                    chartId = "chart_short";
+                } else if (dealType == "Deal") {
+                    $tableLong.clear();
+                    $tableLong.rows.add(response);
+                    $tableLong.draw();
+
+                    chartId = "chart_long";
+                }
+
+
+                Highcharts.chart(chartId, {
                     chart: {
                         type: 'column',
                         padding: [0,0,0,0]
@@ -200,66 +299,92 @@
             });
         }
 
+        function updateBasePairs(strategy) {
+            $.post("{{ route('profit/getBasePair') }}", {
+                "_token" : "{{ csrf_token() }}",
+                "base" : base,
+                "strategy" : strategy,
+                "api_key" : "{{ $api_key }}",
+            }, function (response) {
+                var pairId = "pair_both";
+
+                if (strategy == "%") {
+                    pairId = "pair_both";
+                } else if (strategy == "Deal") {
+                    pairId = "pair_long";
+                } else if (strategy == "Deal::ShortDeal") {
+                    pairId = "pair_short";
+                }
+                $('#' + pairId).empty();
+                response.forEach(function (row, index) {
+                    $('#' + pairId).append('<option value="' + row.pair + '">' + row.pair + '</option>');
+                });
+            });
+        }
+
         $(function () {
             $tableBoth = $('#tbl_both').DataTable(columns);
             $tableLong = $('#tbl_long').DataTable(columns);
             $tableShort = $('#tbl_short').DataTable(columns);
 
-            $('#daterange-btn').daterangepicker(
-                {
-                    opens: "right",
-                    ranges   : {
-                        'Today'       : [moment(), moment()],
-                        'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                        'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                        'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-                        'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                    },
-                    startDate: moment().subtract(29, 'days'),
-                    endDate  : moment()
-                },
-                function (start, end) {
-                    $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            $('#daterange_both').daterangepicker(rangePickerOptions, function (start, end) {
+                $('#daterange_both span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 
-                    rangeStart = start; rangeEnd = end;
-                    makeReport();
-                }
-            );
+                rangeStart = start; rangeEnd = end;
+                makeReport("%");
+            });
 
-            $('.interval_both').on('change', function () {
+            $('#daterange_long').daterangepicker(rangePickerOptions, function (start, end) {
+                $('#daterange_long span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+
+                rangeStart = start; rangeEnd = end;
+                makeReport("Deal");
+            });
+
+            $('#daterange_short').daterangepicker(rangePickerOptions, function (start, end) {
+                $('#daterange_short span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+
+                rangeStart = start; rangeEnd = end;
+                makeReport("Deal::ShortDeal");
+            });
+
+            $('.interval').on('change', function () {
                 interval = $(this).attr('id').split("_")[1];
-                makeReport();
+                strategy = $(this).attr('id').split("_")[2];
+
+                if (strategy == "long") {
+                    makeReport("Deal");
+                } else if (strategy == "short") {
+                    makeReport("Deal::ShortDeal");
+                } else {
+                    makeReport("%");
+                }
             });
 
-            $('#pair_both').select2().on('change', function () {
+            $('.pair').select2().on('change', function () {
                 pairs = $(this).val();
-                if (pairs.length > 0)
-                    makeReport();
+                strategy = $(this).attr('id').split("_")[1];
+                if (pairs.length > 0) {
+                    if (strategy == "long") {
+                        makeReport("Deal");
+                    } else if (strategy == "short") {
+                        makeReport("Deal::ShortDeal");
+                    } else {
+                        makeReport("%");
+                    }
+                }
             });
 
-            $('#base_both').select2().on('change', function () {
+            $('.base').select2().on('change', function () {
                 base = $(this).val();
                 var strategy = $(this).attr('id').split("_")[1];
                 if (strategy == "long") {
-                    var dealType = "Deal";
+                    updateBasePairs("Deal");
                 } else if (strategy == "short") {
-                    var dealType = "Deal::ShortDeal";
+                    updateBasePairs("Deal::ShortDeal");
                 } else {
-                    var dealType = "%";
+                    updateBasePairs("%");
                 }
-
-                $.post("{{ route('profit/getBasePair') }}", {
-                    "_token" : "{{ csrf_token() }}",
-                    "base" : base,
-                    "strategy" : dealType,
-                    "api_key" : "{{ $api_key }}",
-                }, function (response) {
-                    $('#pair_both').empty();
-                    response.forEach(function (row, index) {
-                        $('#pair_both').append('<option value="' + row.pair + '">' + row.pair + '</option>');
-                    });
-                });
             });
 
             @if (sizeof($both) > 0)

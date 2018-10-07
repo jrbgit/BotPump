@@ -97,6 +97,9 @@ class ProfitController extends Controller
         elseif ($interval == "yearly")
             $interval = "YEAR(created_at)";
 
+        if (!isset($pair))
+            $pair = [];
+
         if ($strategy == "%") {
             $sql = "SELECT
                        pair, $interval intval, SUM(final_profit) total_profit,
