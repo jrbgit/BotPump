@@ -27,6 +27,6 @@ class SuccessfulLoginListener
     public function handle(Login $event)
     {
         //
-        //session()->flash('load_deal', encrypt('testing token'));
+        session()->flash('load_deal', encrypt('testing token'));
     }
 }
