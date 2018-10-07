@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-    <div class="w3-container">
+    <div class="box box-primary" style="padding: 0.01em 16px;">
         <h2>Profit By Bot</h2>
 
         <div class="w3-row">
@@ -26,7 +26,7 @@
                 </select>
             </div>
             <div id="chart_both" style="min-width: 310px; min-height: 400px; height: 100%; margin: 0 auto"></div>
-            <div class="content table">
+            <div>
                 <table id ="tbl_both" class="table table-bordered table-striped table-hover-blue"></table>
             </div>
         </div>
@@ -41,7 +41,7 @@
                 </select>
             </div>
             <div id="chart_long" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-            <div class="content table">
+            <div>
                 <table id ="tbl_long" class="table table-bordered table-striped table-hover-blue"></table>
             </div>
         </div>
@@ -56,7 +56,7 @@
                 </select>
             </div>
             <div id="chart_short" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-            <div class="content table">
+            <div>
                 <table id ="tbl_short" class="table table-bordered table-striped table-hover-blue"></table>
             </div>
         </div>

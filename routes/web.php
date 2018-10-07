@@ -36,6 +36,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/profit/bot', 'ProfitController@bot');
     Route::post('/profit/getPairByBase', 'ProfitController@getPairByBase')->name('profit/getPairByBase');
     Route::post('/profit/getBotByBase', 'ProfitController@getBotByBase')->name('profit/getBotByBase');
+    Route::post('/profit/getProfitByDate', 'ProfitController@getProfitByDate')->name('profit/getProfitByDate');
+    Route::post('/profit/getBasePair', 'ProfitController@getBasePair')->name('profit/getBasePair');
 
     Route::get('/calculator/longBot', 'CalculatorController@longBot');
     Route::get('/calculator/shortBot', 'CalculatorController@shortBot');

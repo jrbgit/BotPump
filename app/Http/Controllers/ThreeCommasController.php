@@ -9,7 +9,7 @@ use Config;
 use Auth;
 use Log;
 use Illuminate\Database\QueryException;
-use Dyaa\Pushover\Facades\Pushover;
+//use Dyaa\Pushover\Facades\Pushover;
 
 class ThreeCommasController extends Controller
 {
@@ -115,25 +115,25 @@ class ThreeCommasController extends Controller
                     }
                 }
             }
-        }
-        elseif ($response->getStatusCode() == 429) {
-            Log::critical(['user_id' => $user->id, 'username' => $user->name, 'loadBotsFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Warning message received! Back off the API or get banned.']);
-            Pushover::push('loadBotsFrom3CommasResponse', 'Code 429: Warning message received! Back off the API or get banned.');
-            Pushover::send();
-        }
-        elseif ($response->getStatusCode() == 418) {
-            Log::alert(['user_id' => $user->id, 'username' => $user->name, 'loadBotsFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'BANNED! IP address is banned!']);
-            Pushover::push('loadBotsFrom3CommasResponse', 'Code 418: IP ADDRESS BANNED!');
-            Pushover::send();
+            elseif ($response->getStatusCode() == 429) {
+                Log::critical(['user_id' => $user->id, 'username' => $user->name, 'loadBotsFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Warning message received! Back off the API or get banned.']);
+                Pushover::push('loadBotsFrom3CommasResponse', 'Code 429: Warning message received! Back off the API or get banned.');
+                Pushover::send();
+            }
+            elseif ($response->getStatusCode() == 418) {
+                Log::alert(['user_id' => $user->id, 'username' => $user->name, 'loadBotsFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'BANNED! IP address is banned!']);
+                Pushover::push('loadBotsFrom3CommasResponse', 'Code 418: IP ADDRESS BANNED!');
+                Pushover::send();
 
-        }
-        elseif ($response->getStatusCode() == 500) {
-            Log::critical(['user_id' => $user->id, 'username' => $user->name, 'loadBotsFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Internal Server Error']);
-            Pushover::push('loadBotsFrom3CommasResponse', 'Code 500: Internal Server Error');
-            Pushover::send();
-        }
+            }
+            elseif ($response->getStatusCode() == 500) {
+                Log::critical(['user_id' => $user->id, 'username' => $user->name, 'loadBotsFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Internal Server Error']);
+                Pushover::push('loadBotsFrom3CommasResponse', 'Code 500: Internal Server Error');
+                Pushover::send();
+            }
             else {
-            Log::info(['user_id' => $user->id, 'username' => $user->name, 'loadBotsFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Review this response code']);
+                Log::info(['user_id' => $user->id, 'username' => $user->name, 'loadBotsFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Review this response code']);
+            }
         }
-    }
+        }
 }
