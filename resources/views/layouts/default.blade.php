@@ -107,26 +107,5 @@
 
     @yield('script')
 
-    @if (session()->has('load_deal'))
-        <script>
-            waitingDialog.show('Please wait while downloading');
-
-            var dealLoaded = false, botLoaded = false;
-            $.get('{{ route('3commas/loadDeal') }}', function (response) {
-                console.log(response);
-                dealLoaded = true;
-                if (dealLoaded && botLoaded)
-                    waitingDialog.hide();
-            });
-
-            $.get('{{ route('3commas/loadBots') }}', function (response) {
-                console.log(response);
-                botLoaded = true;
-                if (dealLoaded && botLoaded)
-                    waitingDialog.hide();
-            });
-        </script>
-    @endif
-
 </body>
 </html>

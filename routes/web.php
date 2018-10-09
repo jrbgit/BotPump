@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/dashboard/data', 'DashboardController@data')->name('dashboard/data');
 
     Route::get('/apikey', 'ApiKeyController@index');
     Route::get('/apikey/create', 'ApiKeyController@create');
