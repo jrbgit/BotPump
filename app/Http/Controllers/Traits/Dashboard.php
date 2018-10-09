@@ -29,6 +29,18 @@ trait Dashboard
                 ->where('finished?', 0)
                 ->count();
 
+            $data['active_deals_list'] = DB::table('deals')
+                ->where('api_key_id', $user->api_keys[0]->id)
+                ->where('finished?', 0)
+                ->get();
+
+            $data['recent_completed_deals'] = DB::table('deals')
+                ->where('api_key_id', $user->api_keys[0]->id)
+                ->where('finished?', 1)
+                ->orderBy('id', 'desc')
+                ->limit(10)
+                ->get();
+
             $bases = DB::table('deals')
                 ->select(DB::raw('SUBSTRING_INDEX(pair, "_", 1) base'))
                 ->where('api_key_id', $user->api_keys[0]->id)
