@@ -9,6 +9,7 @@ use Config;
 use Auth;
 use Log;
 use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 //use Dyaa\Pushover\Facades\Pushover;
 
 class ThreeCommasController extends Controller
@@ -60,12 +61,15 @@ class ThreeCommasController extends Controller
                 $deal_count = 0;
                 foreach ($data as $json) {
                     try {
-                        $deal = Deal::firstOrNew(['id' => $json->id]);
+                        try {
+                            $deal = Deal::findOrFail($json->id);
+                        } catch (ModelNotFoundException $e) {
+                            $deal = new Deal();
+                            $deal_count ++;
+                        }
                         $deal->fill((array)$json);
                         $deal->api_key_id = $user->api_keys[0]['id'];
                         $deal->save();
-
-                        $deal_count ++;
                     } catch (QueryException $exception) {
 
                     }
@@ -106,7 +110,11 @@ class ThreeCommasController extends Controller
                 $data = json_decode($response->getBody());
                 foreach ($data as $json) {
                     try {
-                        $bot = Bot::firstOrNew(['id' => $json->id]);
+                        try {
+                            $bot = Bot::findOrFail($json->id);
+                        } catch (ModelNotFoundException $e) {
+                            $bot = new Bot();
+                        }
                         $bot->fill((array)$json);
                         $bot->api_key_id = $user->api_keys[0]['id'];
                         $bot->save();
