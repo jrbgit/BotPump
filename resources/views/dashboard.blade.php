@@ -106,16 +106,10 @@
 @section('script')
   @if (session()->has('load_deal'))
     <script>
-        waitingDialog.show('Please wait while downloading');
-
-        var dealLoaded = false, botLoaded = false;
-        $.get('{{ route('3commas/loadDeal') }}', function (response) {
-            console.log(response);
-            dealLoaded = true;
-            if (dealLoaded && botLoaded)
+        function updateDashboard() {
+            $.get('{{ route('dashboard/data') }}', function (response) {
                 waitingDialog.hide();
 
-            $.get('{{ route('dashboard/data') }}', function (response) {
                 if (response.completed_deals > 0)
                     $('#completed_deals').text(response.completed_deals);
                 else
@@ -158,13 +152,23 @@
                     $('#tbl_dashboard tbody').append('<tr><td colspan="47">No Data Available</td></tr>');
                 }
             });
+        }
+
+        waitingDialog.show('Please wait while downloading');
+
+        var dealLoaded = false, botLoaded = false;
+        $.get('{{ route('3commas/loadDeal') }}', function (response) {
+            console.log(response);
+            dealLoaded = true;
+            if (dealLoaded && botLoaded)
+                updateDashboard();
         });
 
         $.get('{{ route('3commas/loadBots') }}', function (response) {
             console.log(response);
             botLoaded = true;
             if (dealLoaded && botLoaded)
-                waitingDialog.hide();
+                updateDashboard();
         });
     </script>
   @endif
