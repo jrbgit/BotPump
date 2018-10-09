@@ -60,7 +60,7 @@ class ThreeCommasController extends Controller
                 $deal_count = 0;
                 foreach ($data as $json) {
                     try {
-                        $deal = new Deal();
+                        $deal = Deal::firstOrNew(['id' => $json->id]);
                         $deal->fill((array)$json);
                         $deal->api_key_id = $user->api_keys[0]['id'];
                         $deal->save();
@@ -106,7 +106,7 @@ class ThreeCommasController extends Controller
                 $data = json_decode($response->getBody());
                 foreach ($data as $json) {
                     try {
-                        $bot = new Bot();
+                        $bot = Bot::firstOrNew(['id' => $json->id]);
                         $bot->fill((array)$json);
                         $bot->api_key_id = $user->api_keys[0]['id'];
                         $bot->save();

@@ -203,7 +203,10 @@
             endDate  : moment()
         };
 
-        var rangeStartBoth, rangeEndBoth, rangeStartLong, rangeEndLong, rangeStartShort, rangeEndShort, intervalBoth = intervalLong = intervalShort = "daily", pairsBoth = pairsLong = pairsShort = [];
+        var rangeStartBoth, rangeEndBoth, rangeStartLong, rangeEndLong, rangeStartShort, rangeEndShort;
+        var intervalBoth = intervalLong = intervalShort = "daily";
+        var pairsBoth = pairsLong = pairsShort = [];
+        var baseBoth = baseLong = baseShort = "";
 
         function rowNum(data, type, row, meta) {
             return meta.row + 1;
@@ -217,23 +220,24 @@
                 pairs = pairsBoth;
                 rangeStart = rangeStartBoth;
                 rangeEnd = rangeEndBoth;
+                base = baseBoth;
             } else if (dealType == "Deal") {
                 interval = intervalLong;
                 pairs = pairsLong;
                 rangeStart = rangeStartLong;
                 rangeEnd = rangeEndLong;
+                base = baseLong;
             } else if (dealType == "Deal::ShortDeal") {
                 interval = intervalShort;
                 pairs = pairsShort;
                 rangeStart = rangeStartShort;
                 rangeEnd = rangeEndShort;
+                base = baseShort;
             }
-
-            if (pairs.length == 0)
-                return;
 
             $.post("{{ route('profit/getProfitByDate') }}", {
                 "_token" : "{{ csrf_token() }}",
+                "base" : base,
                 "pair" : pairs,
                 "strategy" : dealType,
                 "start" : rangeStart != null ? rangeStart.format('YYYY-MM-DD 00:00:00') : "",
@@ -319,7 +323,7 @@
             });
         }
 
-        function updateBasePairs(strategy) {
+        function updateBasePairs(strategy, base) {
             $.post("{{ route('profit/getBasePair') }}", {
                 "_token" : "{{ csrf_token() }}",
                 "base" : base,
@@ -330,15 +334,19 @@
 
                 if (strategy == "%") {
                     pairId = "pair_both";
+                    pairsBoth = [];
                 } else if (strategy == "Deal") {
                     pairId = "pair_long";
+                    pairsLong = [];
                 } else if (strategy == "Deal::ShortDeal") {
                     pairId = "pair_short";
+                    pairsShort = [];
                 }
                 $('#' + pairId).empty();
                 response.forEach(function (row, index) {
                     $('#' + pairId).append('<option value="' + row.pair + '">' + row.pair + '</option>');
                 });
+                makeReport(strategy);
             });
         }
 
@@ -398,25 +406,32 @@
             });
 
             $('.base').select2().on('change', function () {
-                base = $(this).val();
                 var strategy = $(this).attr('id').split("_")[1];
                 if (strategy == "long") {
-                    updateBasePairs("Deal");
+                    baseLong = $(this).val();
+                    updateBasePairs("Deal", baseLong);
                 } else if (strategy == "short") {
-                    updateBasePairs("Deal::ShortDeal");
+                    baseShort = $(this).val();
+                    updateBasePairs("Deal::ShortDeal", baseShort);
                 } else {
-                    updateBasePairs("%");
+                    baseBoth = $(this).val();
+                    updateBasePairs("%", baseBoth);
                 }
             });
 
             @if (sizeof($both) > 0)
             $('#base_both').val('{{ $both[0]->base }}').trigger('change');
+            baseBoth = '{{ $both[0]->base }}';
             @endif
+
             @if (sizeof($long) > 0)
             $('#base_long').val('{{ $long[0]->base }}').trigger('change');
+            baseLong = '{{ $long[0]->base }}';
             @endif
+
             @if (sizeof($short) > 0)
             $('#base_short').val('{{ $short[0]->base }}').trigger('change');
+            baseShort = '{{ $short[0]->base }}';
             @endif
         });
     </script>
