@@ -47,5 +47,15 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/profile', 'ProfileController@index');
     Route::post('/profile', 'UserController@update_avatar');
+
+    Route::get('/basic/bot', 'BotController@index');
+    Route::get('/basic/bot/{bot}','BotController@show')
+         ->name('basic.bot.show')
+         ->where('id', '[0-9]+');
+
+    Route::get('/basic/deal', 'DealController@index');
+    Route::get('/basic/deal/{deal}','DealController@show')
+         ->name('basic.deal.show')
+         ->where('id', '[0-9]+');
 });
 

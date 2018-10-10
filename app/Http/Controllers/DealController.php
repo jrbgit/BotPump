@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Session;
 use DB;
+use App\Deal;
 
 class DealController extends Controller
 {
@@ -35,7 +36,16 @@ class DealController extends Controller
                 ->where('finished?', 1)
                 ->orderBy('id', 'desc')
                 ->get();
+
+            return view('pages.deal.list', $data);
         }
 
      }
+
+     public function show($id)
+    {
+        $deal = Deal::findOrFail($id);
+
+        return view('pages.deal.show', compact('deal'));
+    }
 }

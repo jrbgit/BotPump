@@ -38,7 +38,7 @@
                     <li class="{{ request()->is('calculator/shortBot*') ? 'active' : '' }}"><a href="{{ url('calculator/shortBot') }}"><i class="fa fa-arrow-circle-down"></i> Short Bot</a></li>
                 </ul>
             </li>
-            <li class="{{ request()->is('basics*') ? 'active menu-open' : '' }} treeview">
+            <li class="{{ request()->is('basic*') ? 'active menu-open' : '' }} treeview">
                 <a href="#">
                     <i class="fa fa-pied-piper-alt"></i>
                     <span>Basic Info</span>
@@ -47,8 +47,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ request()->is('basic/bot*') ? 'active' : '' }}"><a href="#"><i class="fa fa-rocket"></i> Bots</a></li>
-                    <li class="{{ request()->is('basic/deal*') ? 'active' : '' }}"><a href="#"><i class="fa fa-truck"></i> Deals</a></li>
+                    <li class="{{ request()->is('basic/bot*') ? 'active' : '' }}"><a href="{{ url('basic/bot') }}"><i class="fa fa-rocket"></i> Bots</a></li>
+                    <li class="{{ request()->is('basic/deal*') ? 'active' : '' }}"><a href="{{ url('basic/deal') }}"><i class="fa fa-truck"></i> Deals</a></li>
                 </ul>
             </li>
             <!--li class="{{ request()->is('inspector*') ? 'active menu-open' : '' }} treeview">

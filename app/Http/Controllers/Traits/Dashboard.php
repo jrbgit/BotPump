@@ -48,6 +48,20 @@ trait Dashboard
                 ->groupBy('base')
                 ->get();
 
+            $data['bot_count'] = DB::table('bots')
+                ->where('api_key_id', $user->api_keys[0]->id)
+                ->count();
+
+            $data['active_bots'] = DB::table('bots')
+                ->where('api_key_id', $user->api_keys[0]->id)
+                ->where('is_enabled', true)
+                ->count();
+
+            $data['active_bots_list'] = DB::table('bots')
+                ->where('api_key_id', $user->api_keys[0]->id)
+                ->where('is_enabled', true)
+                ->get();
+
             $data['base_profit'] = [];
             $total_completed  = 0;
             $total_panic = 0;

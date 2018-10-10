@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Auth;
 use Session;
 use DB;
+use App\Bot;
+use App\Deal;
+use Illuminate\Http\Request;
 
 class BotController extends Controller
 {
@@ -25,12 +28,21 @@ class BotController extends Controller
 
         if (sizeof($user->api_keys) > 0) {
 
-            $data['all_bots'] = DB::table('bots')
+            $data['bots'] = DB::table('bots')
                 ->where('api_key_id', $user->api_keys[0]->id)
-                ->where('finished?', 1)
-                ->orderBy('id', 'desc')
-                ->get();
+                ->orderBy('is_enabled', 'desc')
+                ->get(); //This query should only show bots
+
+
+            return view('pages.bot.list', $data);
         }
 
      }
+
+    public function show($id)
+    {
+        $bot = Bot::findOrFail($id);
+
+        return view('pages.bot.show', compact('bot'));
+    }
 }
