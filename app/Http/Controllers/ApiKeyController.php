@@ -33,7 +33,8 @@ class ApiKeyController extends Controller
             $api_key->user_id = Auth::user()->id;
 
             if($api_key->save()) {
-                return redirect('apikey');
+                session()->flash('load_deal', encrypt('testing token'));
+                return redirect('dashboard');
             } else {
                 return $this->response->error('logo', 500);
             }
