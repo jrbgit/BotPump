@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use Auth;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -27,6 +28,8 @@ class SuccessfulLoginListener
     public function handle(Login $event)
     {
         //
-        session()->flash('load_deal', encrypt('testing token'));
+        $user = Auth::user();
+        if (sizeof($user->api_keys) > 0)
+            session()->flash('load_deal', encrypt('testing token'));
     }
 }

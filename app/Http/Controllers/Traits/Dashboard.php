@@ -184,6 +184,12 @@ trait Dashboard
 
         } else {
             $data['completed_deals'] = 0;
+            $data['active_deals'] = 0;
+            $data['bot_count'] = 0;
+            $data['active_bots'] = 0;
+            $data['active_deals_list'] = [];
+            $data['active_bots_list'] = [];
+            $data['recent_completed_deals'] = [];
             $data['api_key_id'] = 0;
         }
 

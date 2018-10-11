@@ -115,7 +115,7 @@
       </div>
       <div class="box-body table-responsive no-padding">
         <table class="table table-bordered table-striped table-hover-blue">
-          <tbody><thead><tr>
+            <thead><tr>
             <th>ID / Bot</th>
             <th>Pair</th>
             <th>BO</th>
@@ -125,7 +125,8 @@
             <th colspan="3">Safety Trades</th>
             <th>TP</th>
             <th>C PS</th>
-          </tr></thead>
+            </tr></thead>
+          <tbody>
           @if (count($active_deals_list) > 1)
             @foreach ($active_deals_list as $ad)
                 <td><a href="{{ route('basic.deal.show', $ad->id ) }}" class="label label-primary" title="Show Deal">{{ $ad->id }}</a><br>
@@ -161,8 +162,8 @@
       </div>
       <div class="box-body table-responsive no-padding">
         <table class="table table-bordered table-striped table-hover-blue">
-          <tbody><thead><tr>
-            <th>Name</th>
+            <thead><tr>
+                <th>Name</th>
                 <th>Strategy</th>
                 <th>Pairs</th>
                 <th>BO</th>
@@ -182,7 +183,8 @@
                 <th>ADC</th>
                 <th>BOVT</th>
                 <th>SOVT</th>
-          </tr></thead>
+            </tr></thead>
+          <tbody>
           @if (count($active_bots_list) > 1)
             @foreach ($active_bots_list as $abl)
                 <td><a href="{{ route('basic.bot.show', $abl->id ) }}" class="label label-primary" title="Show Bot">{{ $abl->name }}</a></td>
@@ -226,17 +228,18 @@
       </div>
       <div class="box-body table-responsive no-padding">
         <table class="table table-bordered table-striped table-hover-blue">
-          <tbody><thead><tr>
-            <th>ID / Bot</th>
-            <th>Pair</th>
-            <th>BO</th>
-            <th>SO</th>
-            <th>SOS</th>
-            <th>MC</th>
-            <th colspan="3">Safety Trades</th>
-            <th>TP</th>
-            <th>Final Profit</th>
-          </tr></thead>
+            <thead><tr>
+                <th>ID / Bot</th>
+                <th>Pair</th>
+                <th>BO</th>
+                <th>SO</th>
+                <th>SOS</th>
+                <th>MC</th>
+                <th colspan="3">Safety Trades</th>
+                <th>TP</th>
+                <th>Final Profit</th>
+            </tr></thead>
+          <tbody>
           @if (count($recent_completed_deals) > 1)
             @foreach ($recent_completed_deals as $rd)
                 <td><a href="{{ route('basic.deal.show', $rd->id ) }}" class="label label-primary" title="Show Deal">{{ $rd->id }}</a><br>
