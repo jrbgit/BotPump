@@ -4,7 +4,7 @@
 <div class="box box-primary">
   <div class="box-header">
     <h3 class="box-title">Exchange Key APIs</h3>
-    <a href="{{ url('/exchangekey/create') }}" class="btn btn-sm btn-flat btn-success pull-right">New API Key</a>
+    <a disabled href="#" class="btn btn-sm btn-flat btn-success pull-right">New API Key</a>
   </div>
   <div class="box-body table-responsive no-padding">
     <table class="table table-bordered table-striped">

@@ -25,20 +25,20 @@
 
     <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
-        <span class="info-box-icon bg-green"><i class="fa fa-key"></i></span>
+        <span class="info-box-icon bg-green"><i class="fa fa-rocket"></i></span>
         <div class="info-box-content">
-          <span class="info-box-text">API<br>Key</span>
-          <span id="api_key" class="info-box-number">{{ $api_key_id > 0 ? 'Saved' : '?' }}</span>
+          <span class="info-box-text">Total<br>Bots</span>
+          <span id="bot_count" class="info-box-number">{{ $bot_count > 0 ? number_format($bot_count) : '?' }}</span>
         </div>
       </div>
     </div>
 
     <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
-        <span class="info-box-icon bg-red"><i class="fa fa-bitcoin"></i></span>
+        <span class="info-box-icon bg-green"><i class="fa fa-exclamation-triangle"></i></span>
         <div class="info-box-content">
-          <span class="info-box-text" style="text-decoration: line-through">Live<br>Prices</span>
-          <span class="info-box-number">---</span>
+          <span class="info-box-text">Active<br>Bots</span>
+          <span id="active_bots" class="info-box-number">{{ $active_bots > 0 ? number_format($active_bots) : '?' }}</span>
         </div>
       </div>
     </div>
@@ -77,6 +77,8 @@
                 <td>
                   @if ($total->base != '')
                     <img src="{{ asset('img/coins/' . strtolower($total->base) . '.png') }}" height="22px"> <span class="label bg-gray">{{ $total->base }}</span>
+                  @else
+                    Total
                   @endif
                 </td>
                 <td><span style="font-weight: bold;">{{ $total->profit }}</span></td>
@@ -101,6 +103,167 @@
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-sm-12 col-md-12">
+    <div class="box box-warning">
+      <div class="box-header">
+        <div class="pull-right">
+          Cancel All | Panic Sell All
+        </div>
+        <h3 class="box-title">Active Deals</h3>
+      </div>
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-bordered table-striped table-hover-blue">
+          <tbody><thead><tr>
+            <th>ID / Bot</th>
+            <th>Pair</th>
+            <th>BO</th>
+            <th>SO</th>
+            <th>SOS</th>
+            <th>MC</th>
+            <th colspan="3">Safety Trades</th>
+            <th>TP</th>
+            <th>C PS</th>
+          </tr></thead>
+          @if (count($active_deals_list) > 1)
+            @foreach ($active_deals_list as $ad)
+                <td><a href="{{ route('basic.deal.show', $ad->id ) }}" class="label label-primary" title="Show Deal">{{ $ad->id }}</a><br>
+                  <a href="{{ route('basic.bot.show', $ad->bot_id ) }}" class="label label-primary" title="Show Bot">{{ $ad->bot_name }}</a></td>
+                <td>{{ $ad->pair }}</td>
+                <td>{{ $ad->base_order_volume }}</td>
+                <td>{{ $ad->safety_order_volume }}</td>
+                <td>{{ $ad->safety_order_step_percentage }}</td>
+                <td>{{ $ad->martingale_coefficient }}</td>
+                <td>{{ $ad->completed_safety_orders_count }}</td>
+                <td>{{ $ad->active_safety_orders_count }}</td>
+                <td>{{ $ad->max_safety_orders }}</td>
+                <td>{{ $ad->take_profit }}%</td>
+                <td>C PS</td>
+              </tr>
+            @endforeach
+          @else
+          <tr>
+            <td colspan="47">No Data Available</td>
+          </tr>
+          @endif
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12 col-md-12">
+    <div class="box box-warning">
+      <div class="box-header">
+        <h3 class="box-title">Active Bots</h3>
+      </div>
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-bordered table-striped table-hover-blue">
+          <tbody><thead><tr>
+            <th>Name</th>
+                <th>Strategy</th>
+                <th>Pairs</th>
+                <th>BO</th>
+                <th>SO</th>
+                <th>SOS%</th>
+                <th>Vol</th>
+                <th>SC</th>
+                <th>SOC</th>
+                <th>Max Safe</th>
+                <th>Take Profit</th>
+                <th>Completed USD</th>
+                <th>ADP</th>
+                <th>TUP</th>
+                <th>MAD</th>
+                <th>SL</th>
+                <th>TPT</th>
+                <th>ADC</th>
+                <th>BOVT</th>
+                <th>SOVT</th>
+          </tr></thead>
+          @if (count($active_bots_list) > 1)
+            @foreach ($active_bots_list as $abl)
+                <td><a href="{{ route('basic.bot.show', $abl->id ) }}" class="label label-primary" title="Show Bot">{{ $abl->name }}</a></td>
+                <td>{{ $abl->strategy }}</td> <!-- rewrite value to Single Long Short Multi,m etc-->
+                <td>{{ $abl->pairs }}</td>
+                <td>{{ $abl->base_order_volume }}</td>
+                <td>{{ $abl->safety_order_volume }}</td>
+                <td>{{ $abl->safety_order_step_percentage }}</td>
+                <td>{{ $abl->martingale_volume_coefficient }}</td>
+                <td>{{ $abl->martingale_step_coefficient }}</td>
+                <td>{{ $abl->active_safety_orders_count }}</td>
+                <td>{{ $abl->max_safety_orders }}</td>
+                <td>{{ $abl->take_profit }}%</td>
+                <td>{{ $abl->completed_deals_usd_profit }}</td>
+                <td>{{ $abl->active_deals_usd_profit }}</td>
+                <td>{{ $abl->total_usd_profit }}</td>
+                <td>{{ $abl->max_active_deals }}</td>
+                <td>{{ $abl->strategy_list }}</td>
+                <td>{{ $abl->take_profit_type }}</td>
+                <td>{{ $abl->active_deals_count }}</td>
+                <td>{{ $abl->base_order_volume_type }}</td>
+                <td>{{ $abl->safety_order_volume_type }}</td>
+              </tr>
+            @endforeach
+          @else
+          <tr>
+            <td colspan="47">No Data Available</td>
+          </tr>
+          @endif
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12 col-md-12">
+    <div class="box box-success">
+      <div class="box-header">
+        <h3 class="box-title">Recently Completed Deals</h3>
+      </div>
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-bordered table-striped table-hover-blue">
+          <tbody><thead><tr>
+            <th>ID / Bot</th>
+            <th>Pair</th>
+            <th>BO</th>
+            <th>SO</th>
+            <th>SOS</th>
+            <th>MC</th>
+            <th colspan="3">Safety Trades</th>
+            <th>TP</th>
+            <th>Final Profit</th>
+          </tr></thead>
+          @if (count($recent_completed_deals) > 1)
+            @foreach ($recent_completed_deals as $rd)
+                <td><a href="{{ route('basic.deal.show', $rd->id ) }}" class="label label-primary" title="Show Deal">{{ $rd->id }}</a><br>
+                  <a href="{{ route('basic.bot.show', $rd->bot_id ) }}" class="label label-primary" title="Show Bot">{{ $rd->bot_name }}</a></td>
+                <td>{{ $rd->pair }}</td>
+                <td>{{ $rd->base_order_volume }}</td>
+                <td>{{ $rd->safety_order_volume }}</td>
+                <td>{{ $rd->safety_order_step_percentage }}</td>
+                <td>{{ $rd->martingale_coefficient }}</td>
+                <td>{{ $rd->completed_safety_orders_count }}</td>
+                <td>{{ $rd->active_safety_orders_count }}</td>
+                <td>{{ $rd->max_safety_orders }}</td>
+                <td>{{ $rd->take_profit }}%</td>
+                <td>{{ $rd->final_profit }}</td>
+              </tr>
+            @endforeach
+          @else
+          <tr>
+            <td colspan="47">No Data Available</td>
+          </tr>
+          @endif
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection
 
 @section('script')
@@ -120,10 +283,15 @@
                 else
                     $('#active_deals').text('?');
 
-                if (response.api_key_id > 0)
-                    $('#api_key').text('Saved');
+                if (response.bot_count > 0)
+                    $('#bot_count').text(response.bot_count);
                 else
-                    $('#api_key').text('?');
+                    $('#bot_count').text('?');
+
+                if (response.active_bots > 0)
+                    $('#active_bots').text(response.active_bots);
+                else
+                    $('#active_bots').text('?');
 
                 $('#tbl_dashboard tbody').empty();
                 if (response.completed_deals > 0) {

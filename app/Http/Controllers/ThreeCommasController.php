@@ -93,6 +93,11 @@ class ThreeCommasController extends Controller
                 Pushover::push('loadDealFrom3CommasResponse', 'Code 500: Internal Server Error');
                 Pushover::send();
             }
+            elseif ($response->getStatusCode() == 504) {
+                Log::critical(['user_id' => $user->id, 'username' => $user->name, 'loadDealFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Request Timeout!']);
+                Pushover::push('loadDealFrom3CommasResponse', 'Code 504: Request Timeout!');
+                Pushover::send();
+            }
                 else {
                 Log::info(['user_id' => $user->id, 'username' => $user->name, 'loadDealFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Review this response code']);
             }
