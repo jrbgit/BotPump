@@ -55,56 +55,61 @@ class ThreeCommasController extends Controller
     public function loadDealFrom3Commas() {
         $user = Auth::user();
         if (sizeof($user->api_keys) > 0) {
-            $response = $this->requestThreeCommas($user->api_keys[0], $this->config['user_deals'], ['limit' => 10000, 'offset' => $user->api_keys[0]['deal_count']]);
-            if ($response->getStatusCode() == 200) {
-                $data = json_decode($response->getBody());
-                $deal_count = 0;
-                foreach ($data as $json) {
-                    try {
+            $limit = 10000;
+            $offset = 0;
+            do {
+                $response = $this->requestThreeCommas($user->api_keys[0], $this->config['user_deals'], ['limit' => $limit, 'offset' => $offset]);
+                if ($response->getStatusCode() == 200) {
+                    $data = json_decode($response->getBody());
+                    foreach ($data as $json) {
                         try {
-                            $deal = Deal::findOrFail($json->id);
-                        } catch (ModelNotFoundException $e) {
-                            $deal = new Deal();
-                            $deal_count ++;
+                            try {
+                                $deal = Deal::findOrFail($json->id);
+                            } catch (ModelNotFoundException $e) {
+                                $deal = new Deal();
+                            }
+                            $deal->fill((array)$json);
+                            $deal->api_key_id = $user->api_keys[0]['id'];
+                            $deal->save();
+                        } catch (QueryException $exception) {
+
                         }
-                        $deal->fill((array)$json);
-                        $deal->api_key_id = $user->api_keys[0]['id'];
-                        $deal->save();
-                    } catch (QueryException $exception) {
-
                     }
-                }
-                $user->api_keys[0]['deal_count'] += $deal_count;
-                $user->api_keys[0]->save();
-            }
-            elseif ($response->getStatusCode() == 429) {
-                Log::critical(['user_id' => $user->id, 'username' => $user->name, 'loadDealFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Warning message received! Back off the API or get banned.']);
-                Pushover::push('loadDealFrom3CommasResponse', 'Code 429: Warning message received! Back off the API or get banned.');
-                Pushover::send();
-            }
-            elseif ($response->getStatusCode() == 418) {
-                Log::alert(['user_id' => $user->id, 'username' => $user->name, 'loadDealFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'BANNED! IP address is banned!']);
-                Pushover::push('loadDealFrom3CommasResponse', 'Code 418: IP ADDRESS BANNED!');
-                Pushover::send();
+                    $loaded = count($data);
+                    $offset += count($data);
+                } elseif ($response->getStatusCode() == 429) {
+                    Log::critical(['user_id' => $user->id, 'username' => $user->name, 'loadDealFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Warning message received! Back off the API or get banned.']);
+                    Pushover::push('loadDealFrom3CommasResponse', 'Code 429: Warning message received! Back off the API or get banned.');
+                    Pushover::send();
 
-            }
-            elseif ($response->getStatusCode() == 500) {
-                Log::critical(['user_id' => $user->id, 'username' => $user->name, 'loadDealFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Internal Server Error']);
-                Pushover::push('loadDealFrom3CommasResponse', 'Code 500: Internal Server Error');
-                Pushover::send();
-            }
-            elseif ($response->getStatusCode() == 504) {
-                Log::critical(['user_id' => $user->id, 'username' => $user->name, 'loadDealFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Request Timeout!']);
-                Pushover::push('loadDealFrom3CommasResponse', 'Code 504: Request Timeout!');
-                Pushover::send();
-            }
-                else {
-                Log::info(['user_id' => $user->id, 'username' => $user->name, 'loadDealFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Review this response code']);
-            }
-            echo 'succeed';
-        } else {
+                    break;
+                } elseif ($response->getStatusCode() == 418) {
+                    Log::alert(['user_id' => $user->id, 'username' => $user->name, 'loadDealFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'BANNED! IP address is banned!']);
+                    Pushover::push('loadDealFrom3CommasResponse', 'Code 418: IP ADDRESS BANNED!');
+                    Pushover::send();
+
+                    break;
+                } elseif ($response->getStatusCode() == 500) {
+                    Log::critical(['user_id' => $user->id, 'username' => $user->name, 'loadDealFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Internal Server Error']);
+                    Pushover::push('loadDealFrom3CommasResponse', 'Code 500: Internal Server Error');
+                    Pushover::send();
+
+                    break;
+                } elseif ($response->getStatusCode() == 504) {
+                    Log::critical(['user_id' => $user->id, 'username' => $user->name, 'loadDealFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Request Timeout!']);
+                    Pushover::push('loadDealFrom3CommasResponse', 'Code 504: Request Timeout!');
+                    Pushover::send();
+
+                    break;
+                } else {
+                    Log::info(['user_id' => $user->id, 'username' => $user->name, 'loadDealFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Review this response code']);
+
+                    break;
+                }
+            } while ($loaded == $limit);
 
         }
+        echo 'succeed';
     }
 
     public function loadBotsFrom3Commas() {
@@ -148,5 +153,5 @@ class ThreeCommasController extends Controller
                 Log::info(['user_id' => $user->id, 'username' => $user->name, 'loadBotsFrom3CommasResponse' => $response->getStatusCode(), 'message' => 'Review this response code']);
             }
         }
-        }
+    }
 }
