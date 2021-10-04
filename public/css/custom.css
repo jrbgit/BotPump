@@ -1,0 +1,55 @@
+.w3-container{
+    background-color: white !important;
+    border-top : solid #3c8dbc;
+}
+
+.table-hover-blue>tbody>tr:hover {
+    background-color: #3c8dbc;
+}
+
+.skin-blue .main-header .logo {
+	background-color: black;
+}
+
+.skin-blue .main-header .logo a:hover {
+	background-color: white;
+}
+
+.skin-blue .main-header .navbar {
+	background-color: #243f4c;
+}
+
+.skin-blue .main-header .logo-mini {
+	background-color: white;
+}
+
+.skin-blue .main-header .logo:hover {
+  background-color: #000000;
+}
+
+body {
+    font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+}
+
+tfoot {
+	background-color: darkgray;
+}
+
+.bg-deals {
+    background-color: #244c31;
+}
+
+.content {
+    padding-top: 15px;
+}
